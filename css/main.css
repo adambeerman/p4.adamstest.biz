@@ -1,0 +1,29 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: helvetica;
+}
+
+#menu {
+
+}
+
+#menu ul {
+    list-style: none;
+
+    padding: 0;
+    text-align: center;
+
+    position: relative;
+    float: left;
+    display: block;
+
+}
+#menu ul li {
+    list-style: none;
+    float: left;
+    display: block;
+    position:relative;
+    padding-right: 5px;
+    padding-left: 5px;
+}
