@@ -14,16 +14,10 @@
 <body>
 
 <div id='menu'>
-    <br>
     <!-- placeholder to be able to capitalize the app name on the home page -->
-    <?php $placeholder = APP_NAME ?>
-    <a href='/'><strong><span id = "logo"><?php echo strtoupper($placeholder); ?></span></strong></a>
-    <br>
-    <?=APP_TAGLINE?>
-    <br>
+    <a href='/'><span id = "logo"><?=APP_NAME?></span></a>
 
     <!-- Menu for users who are logged in -->
-    <br>
     <?php if($user): ?>
         <ul>
             <li>
@@ -42,8 +36,6 @@
                 <a href='/users/logout'>Logout</a>
             </li>
         </ul>
-        <br>
-        <br>
 
         <!-- Menu options for users who are not logged in -->
     <?php else: ?>
@@ -56,7 +48,9 @@
             </li>
         </ul>
     <?php endif; ?>
+
     <br>
+    <?=APP_TAGLINE?>
     <br>
 </div>
 

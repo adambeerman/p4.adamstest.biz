@@ -6,6 +6,8 @@
 
         //Display different error codes for different login issues
         switch($error) {
+            case "signup": echo "SIGNUP ISSUE";
+                break;
             case 1: echo "Please enter a valid e-mail address";
                 break;
             case 2: echo "E-mail address already exists!";

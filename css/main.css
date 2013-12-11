@@ -1,3 +1,128 @@
+/* General Formatting */
+
+#income_statement {
+    -webkit-box-shadow: 0px 0px 5px rgba(163,147,130,0.75);
+    -moz-box-shadow: 0px 0px 5px rgba(163,147,130,0.75);
+    box-shadow: 0px 0px 5px rgba(163,147,130,0.75);
+    max-width: 600px;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+div {
+    line-height: 1.5em;
+}
+
+span {
+    float: right;
+    position:relative;
+    cursor: pointer;
+    line-height: 1.5em;
+}
+
+input {
+    text-align: right;
+    width: 145px;
+    float: right;
+}
+
+/* Fluid Row Formatting */
+
+.container {
+    max-width: 500px;
+}
+
+.span8 {
+    text-align: left;
+    line-height: 30px;
+    /*background-color: #f7f7f7;*/
+}
+
+.span4 {
+    text-align: right;
+    line-height: 30px;
+    /*background-color: #e6e6e6;*/
+}
+
+.row-fluid {
+    background-color: #f7f7f7;
+}
+
+/* Specific Features */
+
+.editable_field {
+    cursor: pointer;
+    line-height: 1.5em;
+}
+
+.expandable_right {
+    float: right;
+}
+
+.calculated_field {
+    text-decoration: underline;
+}
+
+#intro h6 {
+    cursor: pointer;
+}
+
+.year:hover {
+    color: red;
+}
+
+
+/* Income Statement Formatting Specific */
+
+.sum_final {
+    color: black;
+    text-align: right;
+}
+
+.left_indent {
+    float: left;
+    text-indent: 25px;
+}
+
+.ind_final {
+    color: darkgray;
+    text-align: right;
+}
+
+.total {
+    font-weight: bold;
+    text-align: right;
+}
+
+.italic {
+    font-style: italic;
+    line-height: 1.5em;
+}
+
+.hidden {
+    display: none;
+}
+
+.bold {
+    color: black;
+    font-weight: bold;
+}
+
+.blank {
+    line-height: 20px;
+    color: white;
+}
+
+.empty {
+    background-color: white;
+}
+
+
+
+
+/* Specific to the navigation bar layout */
+
 body {
     background-color: white;
     color: black;
@@ -5,7 +130,6 @@ body {
 }
 
 #menu {
-
 }
 
 #menu ul {
@@ -26,4 +150,8 @@ body {
     position:relative;
     padding-right: 5px;
     padding-left: 5px;
+}
+
+.error {
+    color: red;
 }

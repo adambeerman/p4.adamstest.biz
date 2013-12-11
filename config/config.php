@@ -29,7 +29,7 @@ A email designated to receive messages from the server. Examples:
  	
  	Some might want this to be the same as the APP_EMAIL, others might want to create a designated gmail address for it
 */ 	
-	define('SYSTEM_EMAIL', 'webmaster@myapp.com'); 
+	define('SYSTEM_EMAIL', 'adamthebeerman@gmail.com');
 
 # Default DB name for this app
 	define('DB_NAME', 'p4_adamstest_biz');
@@ -37,12 +37,20 @@ A email designated to receive messages from the server. Examples:
 # Timezone
 	define('TIMEZONE', 'America/New_York');
 
+#  Image / Avatar settings
+define('AVATAR_PATH', "/uploads/avatars/");
+define('SMALL_W', 200);
+define('SMALL_H', 200);
+define('PLACE_HOLDER_IMAGE', "/uploads/avatars/example.gif");
+
 # If your app is going to have outgoing emails, you should fill in your SMTP settings
 # For this you could use gmail SMTP or something like http://sendgrid.com/
 	//define('SMTP_HOST', '');
 	//define('SMTP_USERNAME', '');
 	//define('SMTP_PASSWORD', '');
 
+
 # For extra security, you might want to set different salts than what the core uses
-	//define('PASSWORD_SALT', '');
-	//define('TOKEN_SALT', '');
+// Never change these salts because all passwords will have been set up with these Salts!!
+define('PASSWORD_SALT', '9SXkb*HrXavHr)ZnUHQE13#G^E--!eoP%wV^n^8E');
+define('TOKEN_SALT', 'VT(ERzKPYyMOE*k3ku^WGrabU1UxisRRBHx(f^a-');
