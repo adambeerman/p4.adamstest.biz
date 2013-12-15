@@ -2,35 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a249e1da-1712-44d3-a402-6da922c7dde3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/jquery.form.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/new_row.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/tables_add.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/bootstrap-responsive.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/bootstrap-responsive.min.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/_v_template.php" afterPath="$PROJECT_DIR$/views/_v_template.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.css" afterPath="$PROJECT_DIR$/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/c_tables.php" afterPath="$PROJECT_DIR$/controllers/c_tables.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/c_users.php" afterPath="$PROJECT_DIR$/controllers/c_users.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/config.php" afterPath="$PROJECT_DIR$/config/config.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/v_index_index.php" afterPath="$PROJECT_DIR$/views/v_index_index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tables_add.js" afterPath="$PROJECT_DIR$/js/tables_add.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/v_tables_index.php" afterPath="$PROJECT_DIR$/views/v_tables_index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/v_tables_view.php" afterPath="$PROJECT_DIR$/views/v_tables_view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/v_users_login.php" afterPath="$PROJECT_DIR$/views/v_users_login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/v_users_signup.php" afterPath="$PROJECT_DIR$/views/v_users_signup.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="p4.adamstest.biz.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1387033790074" ignored="false" />
     <file path="/config.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1386558459821" ignored="false" />
     <file path="/v_index_index.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1386910396600" ignored="false" />
-    <file path="/main.css" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1387135144668" ignored="false" />
+    <file path="/main.css" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1387137041491" ignored="false" />
     <file path="/_v_template.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1387050494533" ignored="false" />
     <file path="/c_users.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1386811232923" ignored="false" />
     <file path="/v_users_signup.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1386722907033" ignored="false" />
-    <file path="/v_tables_index.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1387134607325" ignored="false" />
+    <file path="/v_tables_index.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1387137018775" ignored="false" />
     <file path="/c_tables.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1387054236952" ignored="false" />
     <file path="/v_tables_view.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1386722234828" ignored="false" />
     <file path="/v_users_login.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1386723017831" ignored="false" />
@@ -45,7 +31,7 @@
     <file path="/index.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1386804413837" ignored="false" />
     <file path="/main.js" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1386823439141" ignored="false" />
     <file path="/new_row.php" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1386811439153" ignored="false" />
-    <file path="/tables_add.js" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1387135077902" ignored="false" />
+    <file path="/tables_add.js" changelist="a249e1da-1712-44d3-a402-6da922c7dde3" time="1387137315640" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,24 +51,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="v_index_index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/v_index_index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="23" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_v_template.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/_v_template.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="0" selection-start="641" selection-end="641" vertical-scroll-proportion="-11.25">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="DB.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../core/libraries/DB.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -95,9 +63,9 @@
       <file leaf-file-name="v_tables_index.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/v_tables_index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="8" selection-start="524" selection-end="658" vertical-scroll-proportion="-9.375">
+            <state line="20" column="31" selection-start="701" selection-end="701" vertical-scroll-proportion="-12.5">
               <folding>
-                <marker date="1387134627000" expanded="true" signature="102:166" placeholder="..." />
+                <marker date="1387137019000" expanded="true" signature="102:166" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -133,27 +101,43 @@
       <file leaf-file-name="tables_add.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/tables_add.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="69" selection-start="1219" selection-end="1219" vertical-scroll-proportion="-13.5">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="income.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/income.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="201" column="0" selection-start="5913" selection-end="6135" vertical-scroll-proportion="0.0">
+            <state line="13" column="30" selection-start="281" selection-end="281" vertical-scroll-proportion="-7.5">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="environment.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/environment.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="60" selection-start="844" selection-end="844" vertical-scroll-proportion="-7.5">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="236" column="16" selection-start="3139" selection-end="3139" vertical-scroll-proportion="0.75688815">
+            <state line="234" column="17" selection-start="3117" selection-end="3117" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="c_users.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/c_users.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="0" selection-start="291" selection-end="291" vertical-scroll-proportion="-6.875">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="51" selection-start="569" selection-end="569" vertical-scroll-proportion="0.11034483">
               <folding />
             </state>
           </provider>
@@ -177,8 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/controllers/c_base.php" />
-        <option value="$PROJECT_DIR$/config/config.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/views/v_users_signup.php" />
         <option value="$PROJECT_DIR$/views/v_users_login.php" />
@@ -190,9 +172,11 @@
         <option value="$PROJECT_DIR$/js/main.js" />
         <option value="$PROJECT_DIR$/views/_v_template.php" />
         <option value="$PROJECT_DIR$/controllers/c_tables.php" />
+        <option value="$USER_HOME$/Desktop/environment.php" />
         <option value="$PROJECT_DIR$/views/v_tables_index.php" />
-        <option value="$PROJECT_DIR$/js/tables_add.js" />
         <option value="$PROJECT_DIR$/css/main.css" />
+        <option value="$PROJECT_DIR$/js/tables_add.js" />
+        <option value="$PROJECT_DIR$/config/config.php" />
       </list>
     </option>
   </component>
@@ -466,33 +450,14 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/v_users_login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="694" selection-end="694" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="44" selection-start="923" selection-end="923" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1251" selection-end="1251" vertical-scroll-proportion="-14.375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/new_row.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="23" selection-start="186" selection-end="186" vertical-scroll-proportion="-5.625" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/c_users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="291" selection-end="291" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/income.js">
@@ -553,27 +518,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/v_tables_index.php">
+    <entry file="file://$PROJECT_DIR$/controllers/c_users.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="8" selection-start="524" selection-end="658" vertical-scroll-proportion="-9.375">
-          <folding>
-            <marker date="1387134627000" expanded="true" signature="102:166" placeholder="..." />
-          </folding>
+        <state line="11" column="0" selection-start="291" selection-end="291" vertical-scroll-proportion="-6.875">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/tables_add.js">
+    <entry file="file://$PROJECT_DIR$/views/v_tables_index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="69" selection-start="1219" selection-end="1219" vertical-scroll-proportion="-13.5">
+        <state line="20" column="31" selection-start="701" selection-end="701" vertical-scroll-proportion="-12.5">
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <marker date="1387137019000" expanded="true" signature="102:166" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="236" column="16" selection-start="3139" selection-end="3139" vertical-scroll-proportion="0.75688815">
+        <state line="234" column="17" selection-start="3117" selection-end="3117" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/tables_add.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="30" selection-start="281" selection-end="281" vertical-scroll-proportion="-7.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/environment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="60" selection-start="844" selection-end="844" vertical-scroll-proportion="-7.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="51" selection-start="569" selection-end="569" vertical-scroll-proportion="0.11034483">
           <folding />
         </state>
       </provider>

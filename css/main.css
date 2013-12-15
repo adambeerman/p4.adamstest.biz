@@ -229,7 +229,7 @@ body {
     text-decoration: none;
 }
 
-#new_table {
+#new_table, #new_table_status {
     text-indent: 30px;
     color: darkgray;
     opacity: 0.5;
@@ -240,4 +240,10 @@ body {
 #new_table:hover {
     color: black;
     opacity: 1;
+}
+
+#new_table_status {
+    visibility: hidden;
+    opacitiy: 1;
+    color: darkblue;
 }

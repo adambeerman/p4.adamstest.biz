@@ -18,6 +18,7 @@
             <input type = "submit" value='Create'>
         </form>
     </div>
+    <div id = "new_table_status"></div>
 
     <br>
     <br>
