@@ -9,7 +9,7 @@ class users_controller extends base_controller {
     }
 
     public function index() {
-        echo "TEST TEST";
+
     } # End of Method
 
     public function signup($error = NULL) {
@@ -137,7 +137,7 @@ class users_controller extends base_controller {
             setcookie("token", $token, strtotime('+1 year'), '/', false);
 
             # Send them to the main page
-            Router::redirect('/users/profile');
+            Router::redirect('/tables/index');
         }
     } # End of Method
 

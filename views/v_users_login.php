@@ -22,7 +22,7 @@
 <?php endif; ?>
 
 <h2>Log In</h2>
-<form method='POST' action='/users/p_login'>
+<form id = "log_in_form" method='POST' action='/users/p_login'>
 
     Email<br>
     <input type='text' name='email' placeholder="e-mail">

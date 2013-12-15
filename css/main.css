@@ -15,7 +15,6 @@ div {
 }
 
 span {
-    float: right;
     position:relative;
     cursor: pointer;
     line-height: 1.5em;
@@ -24,7 +23,7 @@ span {
 input {
     text-align: right;
     width: 145px;
-    float: right;
+
 }
 
 /* Fluid Row Formatting */
@@ -130,6 +129,11 @@ body {
 }
 
 #menu {
+    background-color: lightcyan;
+}
+
+#menu span {
+    float: left;
 }
 
 #menu ul {
@@ -154,4 +158,86 @@ body {
 
 .error {
     color: red;
+}
+
+#sign_up_form, #log_in_form{
+    float: left;
+    padding: 5px;
+}
+
+#sign_up_form input, #log_in_form input {
+    padding-right: 5px;
+    width: auto;
+    float: none;
+    text-align: left;
+
+}
+
+#logo {
+    float: left;
+    height: auto;
+    clear: both;
+    font-family: 'Sansita One', cursive;
+}
+
+#logo a {
+    padding-top: 15px;
+    margin: 5px;
+    font-size: 56px;
+}
+
+#logo span {
+    padding-left: 10px;
+    margin-left: 5px;
+}
+
+#nav {
+    float: left;
+    clear: left;
+    padding-left: 10px;
+    text-align: left;
+}
+
+#content {
+    float: left;
+    position: relative;
+    clear: left;
+}
+
+#user_table_index {
+    margin-left: 10px;
+}
+
+#user_table_index span {
+    float: none;
+}
+
+#user_table_index input {
+    text-align: left;
+}
+
+#user_table_index li {
+    text-align: left;
+    float: left;
+    clear: left;
+    padding-left: 0;
+
+}
+#name {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #428bca;
+    text-decoration: none;
+}
+
+#new_table {
+    text-indent: 30px;
+    color: darkgray;
+    opacity: 0.5;
+    position: relative;
+    clear: left;
+}
+
+#new_table:hover {
+    color: black;
+    opacity: 1;
 }

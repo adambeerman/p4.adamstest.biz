@@ -22,7 +22,7 @@
     </div>
 <?php endif; ?>
 
-<form method='POST' action='/users/p_signup'>
+<form id = "sign_up_form" method='POST' action='/users/p_signup'>
 
     Name<br>
     <input type='text' name='first_name' placeholder="First">
@@ -34,6 +34,7 @@
     <br><br>
 
     Password<br>
+    <small>(greater than 5 digits, please!)</small><br>
     <input type='password' name='password' placeholder="password">
     <br><br>
 

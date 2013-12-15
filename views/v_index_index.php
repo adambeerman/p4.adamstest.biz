@@ -1,3 +1,3 @@
 <p>
-	This is v_index_index.php page
+	Insert Content Here
 </p>
