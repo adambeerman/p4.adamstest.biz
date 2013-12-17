@@ -59,7 +59,7 @@
         <?php endif; ?>
     </div>
 
-    <br><br><br><br>
+    <br><br>
 </div>
 <div id = "content">
     <?php if(isset($content)) echo $content; ?>

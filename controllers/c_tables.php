@@ -71,11 +71,31 @@ class tables_controller extends base_controller {
     public function edit($table_id = NULL) {
 
         # Setup view
-        $this->template->content = View::instance('v_tables_view');
+        $this->template->content = View::instance('v_tables_edit');
         $this->template->title   = "Table Name";
+
+        //Select the tables that this user has authored
+        $q = "SELECT *
+                FROM income_tables
+                WHERE income_table_id = ".$table_id;
+
+        # Query the database
+        $table_info = DB::instance(DB_NAME)->select_rows($q);
+
+        //Load relevant JS files
+        $client_files_body = Array(
+            '/js/jquery.form.js',
+            '/js/accounting.js',
+            '/js/income2.js',
+            '/js/tables_edit.js'
+        );
+
+        # Use load_client_files to generate the links from the above array
+        $this->template->client_files_body = Utils::load_client_files($client_files_body);
 
         # Pass data to the view
         $this->template->content->table_id = $table_id;
+        $this->template->content->table_info = $table_info;
 
         # Render template
         echo $this->template;
@@ -132,5 +152,27 @@ class tables_controller extends base_controller {
 
     } # End of Method
 
+    public function edit_caption($table_id = NULL) {
+
+        # Remove Special Characters
+        // $_POST['caption']=htmlspecialchars($_POST['caption']);
+
+        # Unix timestamp to update when the field was modified
+        $_POST['modified'] = Time::now();
+        //echo $_POST['caption'];
+
+        # Generation the where condition, where the post_id matches
+        $where_condition = "WHERE income_tables.income_table_id = ".$_POST['income_table_id'];
+
+        //No longer need the income_table_id
+        unset($_POST['income_table_id']);
+
+        # Edit the entry in the database
+        DB::instance(DB_NAME)->update_row('income_tables', $_POST, $where_condition);
+
+        # Data to send to the javascript
+        echo $_POST['caption'];
+
+    } # End of Method
 
 } # eoc
