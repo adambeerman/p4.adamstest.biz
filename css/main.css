@@ -28,7 +28,7 @@ input {
 /* Fluid Row Formatting */
 
 .container {
-    margin: 10px 0 0 10px;
+    /*margin: 10px 0 0 10px;*/
     max-width: 550px;
 }
 
@@ -50,23 +50,27 @@ input {
 
 /* Specific Features */
 
-.editable_field {
+/*.editable_field {
     cursor: pointer;
     line-height: 1.5em;
+    vertical-align: bottom;
+    padding-right: 2px;
+}*/
+
+.entry_name {
+    margin-left: 0px;
+    padding-right: 5px;
+    text-indent: 25px;
 }
 
 .calculated_field {
-    text-decoration: underline;
+    float: right;
+    /*text-decoration: underline;*/
 }
 
 #intro h6 {
     cursor: pointer;
 }
-
-.year:hover {
-    color: red;
-}
-
 
 /* Income Statement Formatting Specific */
 
@@ -87,12 +91,13 @@ input {
 
 .total {
     font-weight: bold;
-    text-align: right;
+    float: left;
+    text-indent: 50px;
 }
 
 .italic {
     font-style: italic;
-    line-height: 1.5em;
+    float: left;
 }
 
 .hidden {
@@ -255,6 +260,11 @@ body {
     color: darkblue;
 }
 
+#caption_form {
+    display: none;
+    clear: left;
+}
+
 #caption {
     cursor: pointer;
 }
@@ -262,5 +272,32 @@ body {
 .entry {
     float: right;
     clear: both;
+    vertical-align: bottom;
+    padding: 2px;
+    width: 100%;
 }
 
+.entry_name input {
+    text-align: left;
+    width: 100%;
+}
+
+.expand {
+    color: #428bca;
+    clear: both;
+    float: right;
+    font-size: .75em;
+}
+
+.revenue_div, .cos_div, .opex_div, .otherex_div {
+    clear: left;
+}
+
+.calc_name {
+    float: left;
+    text-indent: 50px;
+}
+
+#gross {
+    display: none;
+}

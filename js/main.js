@@ -7,14 +7,14 @@
  */
 
 //Create a new table from the tables_index view
-$("#name").click(function() {
+/*$("#name").click(function() {
 
     //Swap out the new row with the "add new row" button
     $(".hidden").addClass("not_hidden_placeholder").removeClass("hidden");
     $(".not_hidden").addClass("hidden").removeClass("not_hidden");
     $(".not_hidden_placeholder").addClass("not_hidden").removeClass("not_hidden_placeholder");
 
-});
+});*/
 
 /*$("#submit_name").click(function() {
    $length = $('input').val().length;

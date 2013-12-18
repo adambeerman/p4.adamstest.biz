@@ -155,7 +155,7 @@ class tables_controller extends base_controller {
     public function edit_caption($table_id = NULL) {
 
         # Remove Special Characters
-        // $_POST['caption']=htmlspecialchars($_POST['caption']);
+        $_POST['caption']=htmlspecialchars($_POST['caption']);
 
         # Unix timestamp to update when the field was modified
         $_POST['modified'] = Time::now();
@@ -170,8 +170,40 @@ class tables_controller extends base_controller {
         # Edit the entry in the database
         DB::instance(DB_NAME)->update_row('income_tables', $_POST, $where_condition);
 
+        $data = Array();
+        $data['modified'] =  Time::display($_POST['modified']);
+        $data['caption'] = $_POST['caption'];
         # Data to send to the javascript
-        echo $_POST['caption'];
+
+        echo json_encode($data);
+    } # End of Method
+
+    public function store_values($table_id = NULL){
+
+        //Storing form entries in mysql when there is an indeterminate number of entries?
+
+        //Store all of the entries in a new array [3xn] to later tranfer to POST
+            #unset $_POST
+
+
+
+        //Foreach loop, to generate the information to input into the table_entries table
+
+            #foreach:
+                #store income_table_id
+                #store id of parent (revenue/cos/opex/otherex)
+                #store the value
+                #store the name of the entry
+                #run the DB call within the for loop
+                #clear contents of POST
+
+        //insert rows call
+
+        $data = Array();
+
+
+        echo json_encode($data);
+
 
     } # End of Method
 
