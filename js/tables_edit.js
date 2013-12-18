@@ -134,7 +134,8 @@ $('.expand').click(function(){
     // Insert the new entry before the expandable div
     $($newEntry).insertBefore(this);
 
-    $('input').change(function(){
+    //Initiate the accounting format function to the new cells
+    $('.accounting').change(function(){
         //Reformat the entry as currency using an outside accounting JS plugin
         var $moneyPlaceholder = $(this).val();
         $(this).val(accounting.formatMoney($moneyPlaceholder));

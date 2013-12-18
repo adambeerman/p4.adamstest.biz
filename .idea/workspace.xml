@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a249e1da-1712-44d3-a402-6da922c7dde3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/_v_template.php" afterPath="$PROJECT_DIR$/views/_v_template.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/c_tables.php" afterPath="$PROJECT_DIR$/controllers/c_tables.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/income2.js" afterPath="$PROJECT_DIR$/js/income2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tables_edit.js" afterPath="$PROJECT_DIR$/js/tables_edit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/v_tables_edit.php" afterPath="$PROJECT_DIR$/views/v_tables_edit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="p4.adamstest.biz.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,7 +54,7 @@
       <file leaf-file-name="tables_edit.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/tables_edit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="90" selection-start="4339" selection-end="4339" vertical-scroll-proportion="0.6287129">
+            <state line="136" column="62" selection-start="3918" selection-end="3918" vertical-scroll-proportion="0.4059406">
               <folding />
             </state>
           </provider>
@@ -534,7 +527,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/tables_edit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="90" selection-start="4339" selection-end="4339" vertical-scroll-proportion="0.6287129">
+        <state line="136" column="62" selection-start="3918" selection-end="3918" vertical-scroll-proportion="0.4059406">
           <folding />
         </state>
       </provider>
