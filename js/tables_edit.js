@@ -4,22 +4,6 @@
 
 
 /* -------------------------
- updateDB() should be called after each input is modified
- ---------------------------- */
-
-var updateDB = function() {
-
-    //What is the table id?
-    //What is the entry id?
-    //What is the value of the entry or entry_Name
-
-
-
-
-    return;
-};
-
-/* -------------------------
  sumContents() is a function for summing all contents of a given class name
  ---------------------------- */
 
@@ -31,7 +15,7 @@ var sumContents = function($name) {
     //Need to find the items that have the appropriate field name
 
     //THIS DOESN"T WORK HERE
-    $request = "'#"+$name+" input'";
+    /*$request = "'#"+$name+" input'";
     console.log($request);
     var items = $($request);
 
@@ -41,7 +25,7 @@ var sumContents = function($name) {
     for(i = 0; i<count; i++){
         console.log(items[i].value);
         sum += parseFloat(accounting.unformat(items[i].value));
-    }
+    }*/
     /*
      var $fnCall = "#"+ $className + "_sum";
      //Keep the Revenue figure if no numbers entered
@@ -54,11 +38,18 @@ var sumContents = function($name) {
      }*/
 };
 
+/* ----------------------------
+Caption functionality - caption and caption_form toggle on getting clicked
+------------------------------- */
+
 $("#caption").click(function() {
     $("#caption").hide();
     $("#caption_form").show();
 
 });
+
+
+//AJAX setup for updating the table's caption
 
 var options = {
     type: 'POST',
@@ -88,6 +79,55 @@ $(document).ready(function() {
     $('#caption_update').ajaxForm(options);
 });
 
+
+
+
+/* -------------------
+AJAX setup for storing the table entries
+ --------------------- */
+
+//Function that is called on successful change
+
+var revenueAjax = function() {
+
+    var $data = $('#revenue').serialize();
+
+    $.ajax({
+        type: 'POST',
+        url: '/tables/edit_table/',
+        beforeSend: function() {
+            $('#revenue_sum span:last-child').html("calculating sum...");
+        },
+        data: $data,
+        success: function(response) {
+
+            var response = $.parseJSON(response);
+
+            //Determine the sum of the entries - need to use accounting.unformat first!
+            var index,
+                sum = 0;
+
+            for (index = 0; index < response['revenue'].length; ++index) {
+                sum += accounting.unformat(response['revenue'][index]);
+            }
+
+
+            // Inject the results received from process.php into the results div
+            $('#revenue_sum span:last-child').html(accounting.formatMoney(sum));
+        }
+
+    }); // end ajax setup
+};
+
+//Ajax-ify the form
+$(document).ready(function() {
+    // bind 'myForm' and provide a simple callback functionas   \
+    $('#revenue input').change(function() {revenueAjax();});
+});
+
+
+
+
 //Functaionlity for clicking on the "[+]" sign
 $('.expand').click(function(){
 
@@ -96,7 +136,7 @@ $('.expand').click(function(){
 
     //Determine index of the latest entry
 
-    var myIndex = $(this).index();
+    var myIndex = $(this).index()-1;
 
     //Generate the Placeholder values for the section that is expanding a row
     switch(myClass) {
@@ -141,6 +181,8 @@ $('.expand').click(function(){
         $(this).val(accounting.formatMoney($moneyPlaceholder));
         sumContents($(this).parent().parent().parent().attr("id"));
     });
+
+    $('#revenue input').change(function() {revenueAjax();});
 });
 
 // When an "accounting" class has been changed, update the values to accounting format,
@@ -152,7 +194,7 @@ $('.accounting').change(function(){
     $(this).val(accounting.formatMoney($moneyPlaceholder));
 
     //Find the id of this form, to appropriately sum the contents
-    sumContents($(this).parent().parent().parent().attr("id"));
+    //sumContents($(this).parent().parent().parent().attr("id"));
     //profitCalc();
 });
 

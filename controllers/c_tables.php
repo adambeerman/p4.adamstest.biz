@@ -154,6 +154,8 @@ class tables_controller extends base_controller {
 
     public function edit_caption($table_id = NULL) {
 
+        sleep(2);
+
         # Remove Special Characters
         $_POST['caption']=htmlspecialchars($_POST['caption']);
 
@@ -178,14 +180,22 @@ class tables_controller extends base_controller {
         echo json_encode($data);
     } # End of Method
 
-    public function store_values($table_id = NULL){
+    public function edit_table($table_id = NULL){
 
         //Storing form entries in mysql when there is an indeterminate number of entries?
-
-        //Store all of the entries in a new array [3xn] to later tranfer to POST
-            #unset $_POST
+        sleep(.5);
 
 
+        $data['income_table_id'] = $_POST['income_table_id'];
+        $data['revenue'] = $_POST['revenue'];
+        $data['sum'] = array_sum($_POST['revenue']);
+
+        /*foreach($_POST['revenue'] as $i => $item)
+        {
+            //Need to check if the entry already exists in the user_entry table
+
+        }*/
+        echo json_encode($data);
 
         //Foreach loop, to generate the information to input into the table_entries table
 
@@ -199,10 +209,10 @@ class tables_controller extends base_controller {
 
         //insert rows call
 
-        $data = Array();
+        //$data = Array();
 
 
-        echo json_encode($data);
+        //echo json_encode($data);
 
 
     } # End of Method

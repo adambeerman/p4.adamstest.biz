@@ -301,3 +301,8 @@ body {
 #gross {
     display: none;
 }
+
+#caption_update input:first-child {
+    text-align: left;
+    width: 50%;
+}
