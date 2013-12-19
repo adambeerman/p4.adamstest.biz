@@ -88,32 +88,35 @@ AJAX setup for storing the table entries
 
 //Function that is called on successful change
 
-var revenueAjax = function() {
+var updateEntries = function($formName) {
 
-    var $data = $('#revenue').serialize();
+    var $data = $('#'+$formName).serialize();
 
     $.ajax({
         type: 'POST',
-        url: '/tables/edit_table/',
+        url: '/tables/edit_table/'+$formName+'/',
         beforeSend: function() {
-            $('#revenue_sum span:last-child').html("calculating sum...");
+            $('#'+$formName+'_sum span:last-child').html("calculating sum...");
+            console.log($('#'+$formName+'_sum span:last-child'));
         },
         data: $data,
         success: function(response) {
 
             var response = $.parseJSON(response);
 
+            console.log(response);
+
             //Determine the sum of the entries - need to use accounting.unformat first!
             var index,
                 sum = 0;
 
-            for (index = 0; index < response['revenue'].length; ++index) {
-                sum += accounting.unformat(response['revenue'][index]);
+            for (index = 0; index < response[$formName].length; ++index) {
+                sum += accounting.unformat(response[$formName][index]);
             }
 
 
             // Inject the results received from process.php into the results div
-            $('#revenue_sum span:last-child').html(accounting.formatMoney(sum));
+            $('#'+$formName+'_sum span:last-child').html(accounting.formatMoney(sum));
         }
 
     }); // end ajax setup
@@ -122,7 +125,11 @@ var revenueAjax = function() {
 //Ajax-ify the form
 $(document).ready(function() {
     // bind 'myForm' and provide a simple callback functionas   \
-    $('#revenue input').change(function() {revenueAjax();});
+    $('#revenue input').change(function() {updateEntries("revenue");});
+    $('#cos input').change(function() {updateEntries("cos");});
+    $('#opex input').change(function() {updateEntries("opex");});
+    $('#otherex input').change(function() {updateEntries("otherex");});
+
 });
 
 
@@ -182,7 +189,9 @@ $('.expand').click(function(){
         sumContents($(this).parent().parent().parent().attr("id"));
     });
 
-    $('#revenue input').change(function() {revenueAjax();});
+    //Initiate the functionality of the updateEntries function
+    $('#'+myClass+' input').change(function() {updateEntries(myClass);});
+
 });
 
 // When an "accounting" class has been changed, update the values to accounting format,

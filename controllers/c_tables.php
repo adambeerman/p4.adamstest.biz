@@ -180,15 +180,14 @@ class tables_controller extends base_controller {
         echo json_encode($data);
     } # End of Method
 
-    public function edit_table($table_id = NULL){
+    public function edit_table($formName = NULL){
 
         //Storing form entries in mysql when there is an indeterminate number of entries?
         sleep(.5);
 
-
         $data['income_table_id'] = $_POST['income_table_id'];
-        $data['revenue'] = $_POST['revenue'];
-        $data['sum'] = array_sum($_POST['revenue']);
+        $data[$formName] = $_POST[$formName];
+        $data['sum'] = array_sum($_POST[$formName]);
 
         /*foreach($_POST['revenue'] as $i => $item)
         {

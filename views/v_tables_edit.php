@@ -58,6 +58,7 @@
         <div id = "cos_div" class = "container">
             <h5>Cost of Sales</h5>
             <form id = "cos">
+                <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
                 <div class = "entry">
                     <span class = "entry_name pull-left">
                         <input placeholder="Cost of Sales Component Name" name = "cosName[0]">
@@ -72,8 +73,8 @@
                     <br>
                 </div>
                 <div class = "entry calculated_field" id = "cos_sum">
-                    <div class = "total">Total</div>
-                    <div class = "pull-right">Total Cost of Sales</div>
+                    <span class = "total">Total</span>
+                    <span class = "pull-right">Total Cost of Sales</span>
                 </div>
             </form>
             <br>
@@ -102,6 +103,7 @@
         <div id = "opex_div" class = "container">
             <h5>Operating Expenses</h5>
             <form id = "opex">
+                <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
                 <div class = "entry">
                     <span class = "entry_name pull-left">
                         <input placeholder="Op Ex Component Name" name = "opexName[0]">
@@ -125,6 +127,7 @@
         <div id = "otherex_div" class = "container">
             <h5>Other Expenses</h5>
             <form id = "otherex">
+                <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
                 <div class = "entry">
                     <span class = "entry_name pull-left">
                         <input placeholder="Other Expense Component Name" name = "otherexName[0]">
