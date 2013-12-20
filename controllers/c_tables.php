@@ -24,6 +24,7 @@ class tables_controller extends base_controller {
         $this->template->content = View::instance('v_tables_index');
         $this->template->title   = "User's Table Index";
 
+
         # Pass data to the View
         $this->template->content->user_tables = $user_tables;
         //$this->template->content->error = $error;
@@ -46,14 +47,32 @@ class tables_controller extends base_controller {
 
         //If $table_id has been chosen, then need to select a specific table
 
+        //Select the table information from the table the user has selected
+        $q = "SELECT *
+                FROM income_tables
+                WHERE income_table_id = ".$table_id;
+
+        # Query the database
+        $table_info = DB::instance(DB_NAME)->select_rows($q);
+
+        //Select the table entries from the table the user has selected
+        $q2 = "SELECT category, idx, name, value".
+            " FROM table_entries".
+            " WHERE income_table_id = ".$table_id;
+
+        $entry_info = DB::instance(DB_NAME)->select_rows($q2);
+
         # Setup view
         $this->template->content = View::instance('v_tables_view');
-        $this->template->title   = "Table Name";
+        $this->template->title   = "View - ".$table_info[0]['name'];
+
+
 
         # Include the accounting & income javascript files
         $client_files_body = Array(
             '/js/accounting.js',
-            '/js/income.js'
+            '/js/income.js',
+            '/js/tables_view.js'
         );
 
         # Use load_client_files to generate the links from the above array
@@ -62,6 +81,8 @@ class tables_controller extends base_controller {
 
         # Pass data to the view
         $this->template->content->table_id = $table_id;
+        $this->template->content->table_info = $table_info;
+        $this->template->content->entry_info = $entry_info;
 
         # Render template
         echo $this->template;
@@ -80,11 +101,11 @@ class tables_controller extends base_controller {
 
 
         //Select the table entries from the table the user has selected
-        $q2 = "SELECT idx, category, name, value".
+        $q2 = "SELECT category, idx, name, value".
             " FROM table_entries".
             " WHERE income_table_id = ".$table_id;
 
-        $entry_info = DB::instance(DB_NAME)->select_array($q2,'category');
+        $entry_info = DB::instance(DB_NAME)->select_rows($q2);
 
 
         //Load relevant JS files
@@ -266,4 +287,13 @@ class tables_controller extends base_controller {
         echo json_encode($data);
 
     } # End of Method
+
+    public function delete_entry($entryID = NULL){
+
+        //This function will accept the $entry ID and then remove it from the database
+        # Still need to figure out how to re-allocate the other entries
+
+
+
+    } # end of delete_entry method
 } # eoc

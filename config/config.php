@@ -21,6 +21,9 @@ If you want a different default time format for this app, set it below
 # Ideally, this should match the domain name
 	define('APP_EMAIL', 'adamthebeerman@gmail.com');
 
+# What are the category defaults
+    # define('APP_CATEGORIES', ['revenue', 'cos', 'opex', 'otherex']);
+
 /* 
 A email designated to receive messages from the server. Examples:
  	* When there's a MySQL error on the live server it will send it to this email

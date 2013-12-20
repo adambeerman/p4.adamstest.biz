@@ -48,10 +48,10 @@ $(document).ready(function() {
 AJAX setup for storing the table entries
  --------------------- */
 
-//Function that is called on successful change
-
+//Function that is called on successful input change
 var updateEntries = function($formName) {
 
+    //Serialize the form for easy AJAX transfer
     var $data = $('#'+$formName).serialize();
 
     $.ajax({
@@ -62,9 +62,7 @@ var updateEntries = function($formName) {
         success: function(response) {
 
             var response = $.parseJSON(response);
-
-
-            console.log(response);
+            //console.log(response);
 
             //Determine the sum of the entries - need to use accounting.unformat first!
             var index,
@@ -74,12 +72,10 @@ var updateEntries = function($formName) {
                 sum += accounting.unformat(response[$formName][index]);
             }
 
-
             // Inject the results received from process.php into the results div
             $('#'+$formName+'_sum span:last-child').html(accounting.formatMoney(sum));
 
-            //Update timestamp
-            console.log("modified" + response['modified']);
+            //Update timestamp in the heading
             $('#last_modified').html('Last Modified: ' + response['modified']);
         }
 
@@ -95,6 +91,8 @@ $(document).ready(function() {
     $('#otherex input').change(function() {updateEntries("otherex");});
 
 });
+
+
 
 
 
@@ -171,3 +169,15 @@ $('.accounting').change(function(){
 });
 
 
+// When opening up the page, each entry will be populated with a nonformatted value.
+// This function call ensures that each entry is formatted properly
+
+$(document).ready(function(){
+    $(".accounting").each(function(){
+        $(this).val(accounting.formatMoney(this.value))
+        updateEntries('revenue');
+        updateEntries('cos');
+        updateEntries('opex');
+        updateEntries('otherex');
+    });
+});

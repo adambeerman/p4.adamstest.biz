@@ -1,140 +1,188 @@
-<!--
-
-    - Needs to populate table with information in the database, provided by c_tables_view
-    - should have the standard categories (Revenue, COS, Op_Ex, and Other_Ex)
+<!-- The view will look similar to the "edit" page, except there will be no inputs
+    # And there will be additional calculations to run the profit margin calculations
 
     -->
 
-<div class ="container">
-    <div id = "income_statement">
-        <div id = "head">
-            <div class = "row-fluid">
-                <div class = "span8">
-                    <button type="button" onclick="lockValues()">Click to Finalize Income Statement</button>
+<pre>
+    <?php
+
+    //Parse the database query to get an array for each category
+
+    #Initiate category counters
+    $r = 0;
+    $c = 0;
+    $o1 = 0;
+    $o2 = 0;
+
+    #Loop through $entry_info and create new arrays from the categories using array_slice
+    foreach($entry_info as $i => $entry) {
+        switch($entry['category']):
+            case 'revenue':
+                $revenue[$r] = array_slice($entry,1);
+                $r ++;
+                break;
+            case 'cos':
+                $cos[$c] = array_slice($entry,1);
+                $c ++;
+                break;
+            case 'opex':
+                $opex[$o1] = array_slice($entry,1);
+                $o1 ++;
+                break;
+            case 'otherex':
+                $otherex[$o2] = array_slice($entry,1);
+                $o2 ++;
+                break;
+            default:
+                break;
+        endswitch;
+    }
+    ?>
+</pre>
+
+<div id = "income_statement" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><strong><?=$table_info[0]['name']?></strong></h3>
+        <h5 id = "caption"><?=$table_info[0]['caption']?></h5>
+        <h6>Created: <?=Time::display($table_info[0]['created'])?></h6>
+        <h6 id = "last_modified">Last Modified: <?=Time::display($table_info[0]['modified'])?></h6>
+    </div>
+    <div class="panel-body">
+        <div id = "revenue_div" class = "container">
+            <h5>Revenue</h5>
+            <?php foreach($revenue as $r_entry): ?>
+                <div class = "entry">
+                    <span class = "entry_name pull-left">
+                        <?php echo $r_entry['name']?>
+                    </span>
+                    <span class = "pull-right accounting">
+                        <?php echo $r_entry['value']?>
+                    </span>
                 </div>
-                <div class = "span4">
-                    <span class = "editable_field year" title = "Click to Modify">2013</span>
+                <?php endforeach?>
+                <div class = "entry calculated_field" id = "revenue_sum">
+                    <span class = "total">Total</span>
+                    <span class = "pull-right"><strong>Total Revenue</strong></span>
+                </div>
+
+            <br>
+        </div>
+
+
+        <div id = "cos_div" class = "container">
+            <h5>Cost of Sales</h5>
+            <form id = "cos">
+                <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
+
+                <?php foreach($cos as $c_entry): ?>
+                    <div class = "entry">
+                        <span class = "entry_name pull-left">
+                            <input placeholder="Cost of Sales Component Name"
+                                   name = "cosName[<?=$c_entry['idx']?>]"
+                                   value = "<?=$c_entry['name']?>">
+                        </span>
+                        <span class = "pull-right">
+                            <input placeholder="Cost of Sales"
+                                   class = "accounting"
+                                   name = "cos[<?=$c_entry['idx']?>]"
+                                   value = "<?=$c_entry['value']?>">
+                        </span>
+                    </div>
+                <?php endforeach?>
+
+                <div class = "expand">
+                    <span pull-right">[+]</span>
+                    <br>
+                </div>
+                <div class = "entry calculated_field" id = "cos_sum">
+                    <span class = "total">Total</span>
+                    <span class = "pull-right">Total Cost of Sales</span>
+                </div>
+            </form>
+            <br>
+        </div>
+
+        <div id = "gross" class = "container">
+            <div class = "entry italic">
+                <div class = "calc_name" title = "Net of Revenue less Cost of Sales">
+                    Gross Profit
+                </div>
+                <div id = "gross_profit" class = "calculated_field">
+                    Gross Profit
+                </div>
+            </div>
+
+            <div class = "entry italic">
+                <div class = "calc_name" title = "Gross Profit / Revenue">
+                    Gross Margin
+                </div>
+                <div id = "gross_margin" class = "calculated_field">
+                    Gross Margin
                 </div>
             </div>
         </div>
 
-        <div id = "revenue">
-            <h4>Revenue</h4>
-            <div class = "row-fluid">
-                <div class = "span8">
-                    <span class = "editable_field">Component</span><br>
-                    <span class = "expandable_left">&nbsp;</span>
-                    <div>&nbsp;</div>
-                    <div><span class = "total summation">Total Revenue</span></div>
+        <div id = "opex_div" class = "container">
+            <h5>Operating Expenses</h5>
+            <form id = "opex">
+                <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
+                <?php foreach($opex as $o1_entry): ?>
+                    <div class = "entry">
+                        <span class = "entry_name pull-left">
+                            <input placeholder="Op Ex Component Name"
+                                   name = "opexName[<?=$o1_entry['idx']?>]"
+                                   value = "<?=$o1_entry['name']?>">
+                        </span>
+                        <span class = "pull-right">
+                            <input placeholder="Cost of Sales"
+                                   class = "accounting"
+                                   name = "opex[<?=$o1_entry['idx']?>]"
+                                   value = "<?=$o1_entry['value']?>">
+                        </span>
+                    </div>
+                <?php endforeach?>
 
-
+                <div class = "expand">
+                    <span pull-right">[+]</span>
+                    <br>
                 </div>
-                <div class = "span4">
-                    <span><input placeholder="Revenue" class = "revenue"></span><br>
-                    <span class = "expandable_right">[+]</span>
-                    <div>&nbsp;</div>
-                    <div id = "revenue_sum" class = "calculated_field"><span>Revenue</span></div>
+                <div class = "entry calculated_field" id = "opex_sum">
+                    <span class = "total">Total</span>
+                    <span class = "pull-right">Total Operating Expenses</span>
                 </div>
-            </div>
+            </form>
         </div>
 
-        <div id = "cos">
-            <h4>Cost of Goods Sold</h4>
-            <div class = "row-fluid">
-                <div class = "span8">
-                    <span class = "editable_field">Component</span><br>
-                    <span class = "expandable_left">&nbsp;</span>
-                    <div>&nbsp;</div>
-                    <div><span class = "total summation">Total Cost of Goods Sold</span></div>
-                </div>
-                <div class = "span4">
-                    <span><input placeholder="Cost of Goods" class = "cos"></span><br>
-                    <span class = "expandable_right">[+]</span>
-                    <div>&nbsp;</div>
-                    <div id = "cos_sum" class = "calculated_field"><span>Total Cost of Goods</span></div>
-                </div>
-            </div>
-        </div>
+        <div id = "otherex_div" class = "container">
+            <h5>Other Expenses</h5>
+            <form id = "otherex">
+                <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
 
-        <div id = "gross">
-            <h4></h4>
-            <div class = "row-fluid">
-                <div class = "span8 italic">
-                    <span>Gross Profit</span><br>
-                    <span>Gross Margin</span>
-                </div>
-                <div class = "span4 italic">
-                    <span id = "gross_profit" class = "calculated_field">Gross Profit</span><br>
-                    <span id = "gross_margin" class = "calculated_field">Gross Margin</span>
-                </div>
-            </div>
-        </div>
+                <?php foreach($otherex as $o2_entry): ?>
+                    <div class = "entry">
+                        <span class = "entry_name pull-left">
+                            <input placeholder="Other Expense Component Name"
+                                   name = "otherexName[<?=$o2_entry['idx']?>]"
+                                   value = "<?=$o2_entry['name']?>">
+                        </span>
+                        <span class = "pull-right">
+                            <input placeholder="Other Expense"
+                                   class = "accounting"
+                                   name = "otherex[<?=$o2_entry['idx']?>]"
+                                   value = "<?=$o2_entry['value']?>">
+                        </span>
+                    </div>
+                <?php endforeach?>
 
-        <div id = "opex">
-            <h4>Operating Expenses</h4>
-            <div class = "row-fluid">
-                <div class = "span8">
-                    <span class = "editable_field">Component</span><br>
-                    <span class = "expandable_left">&nbsp;</span>
-                    <div>&nbsp;</div>
-                    <div><span class = "total summation">Total Operating Expenses</span></div>
+                <div class = "expand">
+                    <span pull-right">[+]</span>
+                    <br>
                 </div>
-                <div class = "span4">
-                    <span><input placeholder="Op Ex" class = "opex"></span><br>
-                    <span class = "expandable_right">[+]</span>
-                    <div>&nbsp;</div>
-                    <div id = "opex_sum" class = "calculated_field"><span>Op Ex</span></div>
+                <div class = "entry calculated_field" id = "otherex_sum">
+                    <span class = "total">Total</span>
+                    <span class = "pull-right">Total Other Expenses</span>
                 </div>
-            </div>
-        </div>
-
-        <div id = "op">
-            <h4></h4>
-            <div class = "row-fluid">
-                <div class = "span8 italic">
-                    <span>Operating Profit</span><br>
-                    <span>Operating Margin</span>
-                </div>
-                <div class = "span4 italic">
-                    <span id = "op_profit" class = "calculated_field">Operating Profit</span><br>
-                    <span id = "op_margin" class = "calculated_field">Operating Margin</span>
-                </div>
-            </div>
-        </div>
-
-        <div id = "otherex">
-            <h4>Other Expenses</h4>
-            <div class = "row-fluid">
-                <div class = "span8">
-                    <span class = "editable_field">Component</span><br>
-                    <span class = "expandable_left">&nbsp;</span>
-                    <div>&nbsp;</div>
-                    <div><span class = "total summation">Total Other Expenses</span></div>
-                </div>
-                <div class = "span4">
-                    <span><input placeholder="Other Expenses" class = "otherex"></span><br>
-                    <span class = "expandable_right">[+]</span>
-                    <div>&nbsp;</div>
-                    <div id = "otherex_sum" class = "calculated_field"><span>Other Expenses</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div id = "net">
-            <h4></h4>
-            <div class = "row-fluid">
-                <div class = "span8 italic">
-                    <span>Net Profit</span><br>
-                    <span>Net Margin</span>
-                </div>
-                <div class = "span4 italic">
-                    <span id = "net_profit" class = "calculated_field">Net Profit</span><br>
-                    <span id = "net_margin" class = "calculated_field">Net Margin</span>
-                </div>
-            </div>
-        </div>
-        <div id = "foot">
-            <button type="button" onclick="lockValues()">Finalize Income Statement</button>
+            </form>
         </div>
     </div>
 </div>
