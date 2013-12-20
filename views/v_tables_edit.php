@@ -154,5 +154,7 @@
 </div>
 
 <?php echo "These are the entries that were queried";?>
-<?php if(isset($entries)) {echo $entries;} else {echo "no entries";}?>
+<pre>
+    <?php if(isset($entry_info)) {print_r($entry_info);} else {echo "no entries";}?>
+</pre>
 <?php echo "<br> End of Entries"; ?>

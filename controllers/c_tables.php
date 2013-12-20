@@ -70,15 +70,22 @@ class tables_controller extends base_controller {
 
     public function edit($table_id = NULL) {
 
-
-
-        //Select the tables that this user has authored
+        //Select the table information from the table the user has selected
         $q = "SELECT *
                 FROM income_tables
                 WHERE income_table_id = ".$table_id;
 
         # Query the database
         $table_info = DB::instance(DB_NAME)->select_rows($q);
+
+
+        //Select the table entries from the table the user has selected
+        $q2 = "SELECT idx, category, name, value".
+            " FROM table_entries".
+            " WHERE income_table_id = ".$table_id;
+
+        $entry_info = DB::instance(DB_NAME)->select_array($q2,'category');
+
 
         //Load relevant JS files
         $client_files_body = Array(
@@ -99,6 +106,7 @@ class tables_controller extends base_controller {
         # Pass data to the view
         $this->template->content->table_id = $table_id;
         $this->template->content->table_info = $table_info;
+        $this->template->content->entry_info = $entry_info;
 
         # Render template
         echo $this->template;
@@ -215,7 +223,7 @@ class tables_controller extends base_controller {
 
             if(isset($entries[$i])){
 
-                $data['isset']="YES";
+                # Generate the information that needs to be updated
                 $DBdata = Array(
                     "modified" => Time::now(),
                     "value" => floatval(preg_replace("/[^0-9,.-]/","",$item)),
@@ -223,17 +231,19 @@ class tables_controller extends base_controller {
                 );
 
                 # Generation the where condition, where the income_table_id matches
+                # and where the category matches the formName
                 $where_condition = "WHERE table_entries.income_table_id = ".$_POST['income_table_id'].
                     " AND table_entries.category = '".$formName.
                     "' AND table_entries.idx = ".$i;
 
                 # Insert into the users_users table
-                //DB::instance(DB_NAME)->update_row('income_tables', $_POST, $where_condition);
                 DB::instance(DB_NAME)->update_row('table_entries', $DBdata, $where_condition);
             }
 
             #if there is no an entry for this index, then create it
             else {
+
+                # Information to insert into the table
                 $DBdata = Array(
                     "created" => Time::now(),
                     "modified" => Time::now(),
@@ -247,47 +257,13 @@ class tables_controller extends base_controller {
                 # Insert into the users_users table
                 DB::instance(DB_NAME)->insert('table_entries', $DBdata);
             }
-            #else then insert row
-
-
         }
 
-        // $data['dbdata'] = $DBdata;
+        #update timestamp
+        $data['modified'] = Time::display(Time::now());
 
-
-
-
-
-        /*
-
-        //DATABASE QUERY to see what exists
-        # Want all entries that match this table ID
-        # Also, need the "category" to match the $formName variable
-        # order by index to make it easier
-
-
-
-
-
-        foreach($_POST[$formName] as $i => $item)
-        {
-            #What is the corresponding name of the the field name?
-
-            $fieldName = $_POST[$formName+'Name'][$i];
-
-            //Generate the where condition -
-            # Where index = $i
-            # IF that exists, then update
-            # ELSE then insert row
-
-
-        }
-
-       */
-
+        #Pass JSON data to Javascript
         echo json_encode($data);
 
-
     } # End of Method
-
 } # eoc

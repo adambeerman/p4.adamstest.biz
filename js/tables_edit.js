@@ -32,7 +32,7 @@ var options = {
         $('#caption').removeClass("blue_text");
         $('#caption_form').hide();
         $('#caption').show();
-        $('#last_modified').html('Last modified: ' + data['modified']);
+        $('#last_modified').html('Last Modified: ' + data['modified']);
 
     }
 };
@@ -77,6 +77,10 @@ var updateEntries = function($formName) {
 
             // Inject the results received from process.php into the results div
             $('#'+$formName+'_sum span:last-child').html(accounting.formatMoney(sum));
+
+            //Update timestamp
+            console.log("modified" + response['modified']);
+            $('#last_modified').html('Last Modified: ' + response['modified']);
         }
 
     }); // end ajax setup
