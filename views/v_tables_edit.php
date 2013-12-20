@@ -6,6 +6,9 @@
     -->
 <?php $_POST['income_table_id'] = $table_id; ?>
 
+
+
+
 <div id = "income_statement" class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title"><strong><?=$table_info[0]['name']?></strong></h3>
@@ -149,3 +152,7 @@
         </div>
     </div>
 </div>
+
+<?php echo "These are the entries that were queried";?>
+<?php if(isset($entries)) {echo $entries;} else {echo "no entries";}?>
+<?php echo "<br> End of Entries"; ?>

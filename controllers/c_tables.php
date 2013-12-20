@@ -70,9 +70,7 @@ class tables_controller extends base_controller {
 
     public function edit($table_id = NULL) {
 
-        # Setup view
-        $this->template->content = View::instance('v_tables_edit');
-        $this->template->title   = "Table Name";
+
 
         //Select the tables that this user has authored
         $q = "SELECT *
@@ -89,6 +87,11 @@ class tables_controller extends base_controller {
             '/js/income2.js',
             '/js/tables_edit.js'
         );
+
+
+        # Setup view
+        $this->template->content = View::instance('v_tables_edit');
+        $this->template->title   = "Edit - ".$table_info[0]['name'];
 
         # Use load_client_files to generate the links from the above array
         $this->template->client_files_body = Utils::load_client_files($client_files_body);
@@ -154,8 +157,6 @@ class tables_controller extends base_controller {
 
     public function edit_caption($table_id = NULL) {
 
-        sleep(2);
-
         # Remove Special Characters
         $_POST['caption']=htmlspecialchars($_POST['caption']);
 
@@ -163,7 +164,7 @@ class tables_controller extends base_controller {
         $_POST['modified'] = Time::now();
         //echo $_POST['caption'];
 
-        # Generation the where condition, where the post_id matches
+        # Generation the where condition, where the income_table_id matches
         $where_condition = "WHERE income_tables.income_table_id = ".$_POST['income_table_id'];
 
         //No longer need the income_table_id
@@ -180,38 +181,111 @@ class tables_controller extends base_controller {
         echo json_encode($data);
     } # End of Method
 
-    public function edit_table($formName = NULL){
+    public function edit_entries($formName = NULL){
 
         //Storing form entries in mysql when there is an indeterminate number of entries?
-        sleep(.5);
 
         $data['income_table_id'] = $_POST['income_table_id'];
         $data[$formName] = $_POST[$formName];
-        $data['sum'] = array_sum($_POST[$formName]);
 
-        /*foreach($_POST['revenue'] as $i => $item)
+
+        //DATABASE UpdateRows to input into the database
+        # This should be called *after* the DATABASE QUERY
+        # It is in front for purposes of testing
+
+        $q = "SELECT *".
+            " FROM table_entries".
+            " WHERE".
+                " table_entries.income_table_id = ".$_POST['income_table_id'].
+                " AND table_entries.category = '".$formName."'".
+            " ORDER BY idx ASC";
+
+
+        //$data['q']= $q;
+        # Run the query
+        $entries = DB::instance(DB_NAME)->select_rows($q);
+
+        $data['entries'] = $entries;
+
+        foreach($_POST[$formName] as $i => $item) {
+
+            #Check if the entry already exists
+
+            #if exists, then update row
+
+            if(isset($entries[$i])){
+
+                $data['isset']="YES";
+                $DBdata = Array(
+                    "modified" => Time::now(),
+                    "value" => floatval(preg_replace("/[^0-9,.-]/","",$item)),
+                    "name" => $_POST[$formName.'Name'][$i]
+                );
+
+                # Generation the where condition, where the income_table_id matches
+                $where_condition = "WHERE table_entries.income_table_id = ".$_POST['income_table_id'].
+                    " AND table_entries.category = '".$formName.
+                    "' AND table_entries.idx = ".$i;
+
+                # Insert into the users_users table
+                //DB::instance(DB_NAME)->update_row('income_tables', $_POST, $where_condition);
+                DB::instance(DB_NAME)->update_row('table_entries', $DBdata, $where_condition);
+            }
+
+            #if there is no an entry for this index, then create it
+            else {
+                $DBdata = Array(
+                    "created" => Time::now(),
+                    "modified" => Time::now(),
+                    "income_table_id" => $data['income_table_id'],
+                    "category" => $formName,
+                    "idx" => $i,
+                    "value" => floatval(preg_replace("/[^0-9,.-]/","",$item)),
+                    "name" => $_POST[$formName.'Name'][$i]
+                );
+
+                # Insert into the users_users table
+                DB::instance(DB_NAME)->insert('table_entries', $DBdata);
+            }
+            #else then insert row
+
+
+        }
+
+        // $data['dbdata'] = $DBdata;
+
+
+
+
+
+        /*
+
+        //DATABASE QUERY to see what exists
+        # Want all entries that match this table ID
+        # Also, need the "category" to match the $formName variable
+        # order by index to make it easier
+
+
+
+
+
+        foreach($_POST[$formName] as $i => $item)
         {
-            //Need to check if the entry already exists in the user_entry table
+            #What is the corresponding name of the the field name?
 
-        }*/
+            $fieldName = $_POST[$formName+'Name'][$i];
+
+            //Generate the where condition -
+            # Where index = $i
+            # IF that exists, then update
+            # ELSE then insert row
+
+
+        }
+
+       */
+
         echo json_encode($data);
-
-        //Foreach loop, to generate the information to input into the table_entries table
-
-            #foreach:
-                #store income_table_id
-                #store id of parent (revenue/cos/opex/otherex)
-                #store the value
-                #store the name of the entry
-                #run the DB call within the for loop
-                #clear contents of POST
-
-        //insert rows call
-
-        //$data = Array();
-
-
-        //echo json_encode($data);
 
 
     } # End of Method

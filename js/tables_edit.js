@@ -3,41 +3,6 @@
 //Goal is to perform an AJAX transfer after each entry is updated
 
 
-/* -------------------------
- sumContents() is a function for summing all contents of a given class name
- ---------------------------- */
-
-var sumContents = function($name) {
-
-
-    //Find the items that have the associated class=
-
-    //Need to find the items that have the appropriate field name
-
-    //THIS DOESN"T WORK HERE
-    /*$request = "'#"+$name+" input'";
-    console.log($request);
-    var items = $($request);
-
-    var count = items.length;
-    console.log(count);
-    var i, sum = 0;
-    for(i = 0; i<count; i++){
-        console.log(items[i].value);
-        sum += parseFloat(accounting.unformat(items[i].value));
-    }*/
-    /*
-     var $fnCall = "#"+ $className + "_sum";
-     //Keep the Revenue figure if no numbers entered
-     if(isNaN(sum)){
-     $($fnCall).html($className);
-     }
-     //Replace the #revenue html with the sum of the figures
-     else {
-     $($fnCall).html(accounting.formatMoney(sum));
-     }*/
-};
-
 /* ----------------------------
 Caption functionality - caption and caption_form toggle on getting clicked
 ------------------------------- */
@@ -50,7 +15,6 @@ $("#caption").click(function() {
 
 
 //AJAX setup for updating the table's caption
-
 var options = {
     type: 'POST',
     url: '/tables/edit_caption/',
@@ -80,8 +44,6 @@ $(document).ready(function() {
 });
 
 
-
-
 /* -------------------
 AJAX setup for storing the table entries
  --------------------- */
@@ -94,15 +56,13 @@ var updateEntries = function($formName) {
 
     $.ajax({
         type: 'POST',
-        url: '/tables/edit_table/'+$formName+'/',
-        beforeSend: function() {
-            $('#'+$formName+'_sum span:last-child').html("calculating sum...");
-            console.log($('#'+$formName+'_sum span:last-child'));
-        },
+        url: '/tables/edit_entries/'+$formName+'/',
+        beforeSend: function() {},
         data: $data,
         success: function(response) {
 
             var response = $.parseJSON(response);
+
 
             console.log(response);
 
@@ -186,7 +146,6 @@ $('.expand').click(function(){
         //Reformat the entry as currency using an outside accounting JS plugin
         var $moneyPlaceholder = $(this).val();
         $(this).val(accounting.formatMoney($moneyPlaceholder));
-        sumContents($(this).parent().parent().parent().attr("id"));
     });
 
     //Initiate the functionality of the updateEntries function

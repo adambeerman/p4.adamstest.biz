@@ -25,14 +25,3 @@
 
 </div>
 
-<!-- The user will need have some options for what tables they can choose from, provided by c_tables_index
-Then will need to send the selected table to c_tables_view
-    - need to be able to select a table to open
-    - need option to create a new table
-    - need option to delete an unwanted table
-    - need option to clone a table
-
-
-    -->
-
-
