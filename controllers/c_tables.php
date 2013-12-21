@@ -217,7 +217,6 @@ class tables_controller extends base_controller {
         $data['income_table_id'] = $_POST['income_table_id'];
         $data[$formName] = $_POST[$formName];
 
-
         //DATABASE UpdateRows to input into the database
         # This should be called *after* the DATABASE QUERY
         # It is in front for purposes of testing
@@ -287,6 +286,8 @@ class tables_controller extends base_controller {
         echo json_encode($data);
 
     } # End of Method
+
+
 
     public function delete_entry($entryID = NULL){
 

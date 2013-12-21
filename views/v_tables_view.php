@@ -48,7 +48,7 @@
         <h6 id = "last_modified">Last Modified: <?=Time::display($table_info[0]['modified'])?></h6>
     </div>
     <div class="panel-body">
-        <div id = "revenue_div" class = "container">
+        <div id = "revenue" class = "container">
             <h5>Revenue</h5>
             <?php foreach($revenue as $r_entry): ?>
                 <div class = "entry">
@@ -59,46 +59,33 @@
                         <?php echo $r_entry['value']?>
                     </span>
                 </div>
-                <?php endforeach?>
+            <?php endforeach?>
                 <div class = "entry calculated_field" id = "revenue_sum">
                     <span class = "total">Total</span>
                     <span class = "pull-right"><strong>Total Revenue</strong></span>
                 </div>
-
             <br>
         </div>
 
 
-        <div id = "cos_div" class = "container">
+        <div id = "cos" class = "container">
             <h5>Cost of Sales</h5>
-            <form id = "cos">
-                <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
 
-                <?php foreach($cos as $c_entry): ?>
-                    <div class = "entry">
-                        <span class = "entry_name pull-left">
-                            <input placeholder="Cost of Sales Component Name"
-                                   name = "cosName[<?=$c_entry['idx']?>]"
-                                   value = "<?=$c_entry['name']?>">
-                        </span>
-                        <span class = "pull-right">
-                            <input placeholder="Cost of Sales"
-                                   class = "accounting"
-                                   name = "cos[<?=$c_entry['idx']?>]"
-                                   value = "<?=$c_entry['value']?>">
-                        </span>
-                    </div>
-                <?php endforeach?>
+            <?php foreach($cos as $c_entry): ?>
+                <div class = "entry">
+                <span class = "entry_name pull-left">
+                    <?php echo $c_entry['name']?>
+                </span>
+                <span class = "pull-right accounting">
+                    <?php echo $c_entry['value']?>
+                </span>
+                </div>
+            <?php endforeach?>
 
-                <div class = "expand">
-                    <span pull-right">[+]</span>
-                    <br>
-                </div>
-                <div class = "entry calculated_field" id = "cos_sum">
-                    <span class = "total">Total</span>
-                    <span class = "pull-right">Total Cost of Sales</span>
-                </div>
-            </form>
+            <div class = "entry calculated_field" id = "cos_sum">
+                <span class = "total">Total</span>
+                <span class = "pull-right"><strong>Total Cost of Sales</strong></span>
+            </div>
             <br>
         </div>
 
@@ -122,67 +109,41 @@
             </div>
         </div>
 
-        <div id = "opex_div" class = "container">
+        <div id = "opex" class = "container">
             <h5>Operating Expenses</h5>
-            <form id = "opex">
-                <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
-                <?php foreach($opex as $o1_entry): ?>
-                    <div class = "entry">
-                        <span class = "entry_name pull-left">
-                            <input placeholder="Op Ex Component Name"
-                                   name = "opexName[<?=$o1_entry['idx']?>]"
-                                   value = "<?=$o1_entry['name']?>">
-                        </span>
-                        <span class = "pull-right">
-                            <input placeholder="Cost of Sales"
-                                   class = "accounting"
-                                   name = "opex[<?=$o1_entry['idx']?>]"
-                                   value = "<?=$o1_entry['value']?>">
-                        </span>
-                    </div>
-                <?php endforeach?>
+            <?php foreach($opex as $o1_entry): ?>
+                <div class = "entry">
+                <span class = "entry_name pull-left">
+                    <?php echo $o1_entry['name']?>
+                </span>
+                <span class = "pull-right accounting">
+                    <?php echo $o1_entry['value']?>
+                </span>
+                </div>
+            <?php endforeach?>
 
-                <div class = "expand">
-                    <span pull-right">[+]</span>
-                    <br>
-                </div>
-                <div class = "entry calculated_field" id = "opex_sum">
-                    <span class = "total">Total</span>
-                    <span class = "pull-right">Total Operating Expenses</span>
-                </div>
-            </form>
+            <div class = "entry calculated_field" id = "opex_sum">
+                <span class = "total">Total</span>
+                <span class = "pull-right"><strong>Total Operating Expenses</strong></span>
+            </div>
         </div>
 
-        <div id = "otherex_div" class = "container">
+        <div id = "otherex" class = "container">
             <h5>Other Expenses</h5>
-            <form id = "otherex">
-                <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
-
-                <?php foreach($otherex as $o2_entry): ?>
-                    <div class = "entry">
-                        <span class = "entry_name pull-left">
-                            <input placeholder="Other Expense Component Name"
-                                   name = "otherexName[<?=$o2_entry['idx']?>]"
-                                   value = "<?=$o2_entry['name']?>">
-                        </span>
-                        <span class = "pull-right">
-                            <input placeholder="Other Expense"
-                                   class = "accounting"
-                                   name = "otherex[<?=$o2_entry['idx']?>]"
-                                   value = "<?=$o2_entry['value']?>">
-                        </span>
-                    </div>
-                <?php endforeach?>
-
-                <div class = "expand">
-                    <span pull-right">[+]</span>
-                    <br>
+            <?php foreach($otherex as $o2_entry): ?>
+                <div class = "entry">
+                <span class = "entry_name pull-left">
+                    <?php echo $o2_entry['name']?>
+                </span>
+                <span class = "pull-right accounting">
+                    <?php echo $o2_entry['value']?>
+                </span>
                 </div>
-                <div class = "entry calculated_field" id = "otherex_sum">
-                    <span class = "total">Total</span>
-                    <span class = "pull-right">Total Other Expenses</span>
-                </div>
-            </form>
+            <?php endforeach?>
+            <div class = "entry calculated_field" id = "otherex_sum">
+                <span class = "total">Total</span>
+                <span class = "pull-right"><strong>Total Other Expenses</strong></span>
+            </div>
         </div>
     </div>
 </div>
