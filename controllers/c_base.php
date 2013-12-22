@@ -25,10 +25,6 @@ class base_controller {
 		# So we can use $user in views			
 			$this->template->set_global('user', $this->user);
 			
-	}
-
-    public function test() {
-        var_dump(DB::instance(DB_NAME));
-    }
+	} # end of method
 	
 } # eoc

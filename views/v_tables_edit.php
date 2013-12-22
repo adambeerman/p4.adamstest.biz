@@ -6,42 +6,40 @@
     -->
 <?php $_POST['income_table_id'] = $table_id; ?>
 
-<pre>
-    <?php
+<?php
 
-    //Parse the database query to get an array for each category
+//Parse the database query to get an array for each category
 
-    #Initiate category counters
-    $r = 0;
-    $c = 0;
-    $o1 = 0;
-    $o2 = 0;
+#Initiate category counters
+$r = 0;
+$c = 0;
+$o1 = 0;
+$o2 = 0;
 
-    #Loop through $entry_info and create new arrays from the categories using array_slice
-    foreach($entry_info as $i => $entry) {
-        switch($entry['category']):
-            case 'revenue':
-                $revenue[$r] = array_slice($entry,1);
-                $r ++;
-                break;
-            case 'cos':
-                $cos[$c] = array_slice($entry,1);
-                $c ++;
-                break;
-            case 'opex':
-                $opex[$o1] = array_slice($entry,1);
-                $o1 ++;
-                break;
-            case 'otherex':
-                $otherex[$o2] = array_slice($entry,1);
-                $o2 ++;
-                break;
-            default:
-                break;
-        endswitch;
-    }
-    ?>
-</pre>
+#Loop through $entry_info and create new arrays from the categories using array_slice
+foreach($entry_info as $i => $entry) {
+    switch($entry['category']):
+        case 'revenue':
+            $revenue[$r] = array_slice($entry,1);
+            $r ++;
+            break;
+        case 'cos':
+            $cos[$c] = array_slice($entry,1);
+            $c ++;
+            break;
+        case 'opex':
+            $opex[$o1] = array_slice($entry,1);
+            $o1 ++;
+            break;
+        case 'otherex':
+            $otherex[$o2] = array_slice($entry,1);
+            $o2 ++;
+            break;
+        default:
+            break;
+    endswitch;
+}
+?>
 
 <div id = "income_statement" class="panel panel-default">
     <div class="panel-heading">
@@ -61,6 +59,7 @@
 
         <h6>Created: <?=Time::display($table_info[0]['created'])?></h6>
         <h6 id = "last_modified">Last Modified: <?=Time::display($table_info[0]['modified'])?></h6>
+        <h6><a href = '/tables/view/<?=$table_id?>'>Click here to view the final copy</a></h6>
     </div>
 
 
@@ -71,22 +70,36 @@
             <form id = "revenue">
                 <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
 
-                <?php foreach($revenue as $r_entry): ?>
+                <?php if(isset($revenue)): ?>
+                    <?php foreach($revenue as $r_entry): ?>
+                        <div class = "entry">
+                            <span class = "entry_name pull-left">
+                                <input placeholder="Revenue Component Name"
+                                    name = "revenueName[<?=$r_entry['idx']?>]"
+                                    value = "<?=$r_entry['name']?>">
+                            </span>
+                            <span class = "pull-right">
+                                <input placeholder="Revenue"
+                                    class = "accounting"
+                                    name = "revenue[<?=$r_entry['idx']?>]"
+                                    value = "<?=$r_entry['value']?>">
+                            </span>
+                        </div>
+                    <?php endforeach?>
+                <?php else: ?>
                     <div class = "entry">
                         <span class = "entry_name pull-left">
                             <input placeholder="Revenue Component Name"
-                                name = "revenueName[<?=$r_entry['idx']?>]"
-                                value = "<?=$r_entry['name']?>">
+                                   name = "revenueName[0]">
                         </span>
                         <span class = "pull-right">
                             <input placeholder="Revenue"
-                                class = "accounting"
-                                name = "revenue[<?=$r_entry['idx']?>]"
-                                value = "<?=$r_entry['value']?>">
-                            <a href = '/tables/delete_entry/'>[-]</a>
+                                   class = "accounting"
+                                   name = "revenue[0]">
                         </span>
                     </div>
-                <?php endforeach?>
+                <?php endif ?>
+
 
                 <div class = "expand">
                     <span pull-right">[+]</span>
@@ -106,21 +119,35 @@
             <form id = "cos">
                 <input class = "hidden" name = "income_table_id" value="<?=$table_info[0]['income_table_id']?>">
 
-                <?php foreach($cos as $c_entry): ?>
+                <?php if(isset($cos)): ?>
+                    <?php foreach($cos as $c_entry): ?>
+                        <div class = "entry">
+                            <span class = "entry_name pull-left">
+                                <input placeholder="Cost of Sales Component Name"
+                                       name = "cosName[<?=$c_entry['idx']?>]"
+                                       value = "<?=$c_entry['name']?>">
+                            </span>
+                            <span class = "pull-right">
+                                <input placeholder="Cost of Sales"
+                                       class = "accounting"
+                                       name = "cos[<?=$c_entry['idx']?>]"
+                                       value = "<?=$c_entry['value']?>">
+                            </span>
+                        </div>
+                    <?php endforeach?>
+                <?php else: ?>
                     <div class = "entry">
                         <span class = "entry_name pull-left">
                             <input placeholder="Cost of Sales Component Name"
-                                   name = "cosName[<?=$c_entry['idx']?>]"
-                                   value = "<?=$c_entry['name']?>">
+                                   name = "cosName[0]">
                         </span>
                         <span class = "pull-right">
                             <input placeholder="Cost of Sales"
                                    class = "accounting"
-                                   name = "cos[<?=$c_entry['idx']?>]"
-                                   value = "<?=$c_entry['value']?>">
+                                   name = "cos[0]">
                         </span>
                     </div>
-                <?php endforeach?>
+                <?php endif ?>
 
                 <div class = "expand">
                     <span pull-right">[+]</span>
@@ -134,7 +161,7 @@
             <br>
         </div>
 
-        <div id = "gross" class = "container">
+        <!--<div id = "gross" class = "container">
             <div class = "entry italic">
                 <div class = "calc_name" title = "Net of Revenue less Cost of Sales">
                     Gross Profit
@@ -152,7 +179,7 @@
                     Gross Margin
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div id = "opex_div" class = "container">
             <h5>Operating Expenses</h5>

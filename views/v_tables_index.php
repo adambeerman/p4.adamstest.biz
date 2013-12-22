@@ -1,4 +1,3 @@
-<br><br>
 <div id = "user_table_index">
     <h3><?=$user->first_name ?>'s index of tables</h3>
 

@@ -4,7 +4,7 @@
     -webkit-box-shadow: 0px 0px 5px rgba(163,147,130,0.75);
     -moz-box-shadow: 0px 0px 5px rgba(163,147,130,0.75);
     box-shadow: 0px 0px 5px rgba(163,147,130,0.75);
-    max-width: 700px;
+    max-width: 600px;
     border-radius: 5px;
     margin: 10px;
 
@@ -285,11 +285,12 @@ body {
 
 .calc_name {
     float: left;
-    text-indent: 50px;
+
 }
 
-#gross {
-    display: none;
+#gross, #operating, #net {
+    text-indent: 25px;
+    color: #444444;
 }
 
 #caption_update input:first-child {

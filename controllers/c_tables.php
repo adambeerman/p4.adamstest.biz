@@ -22,7 +22,7 @@ class tables_controller extends base_controller {
 
         #Pass
         $this->template->content = View::instance('v_tables_index');
-        $this->template->title   = "User's Table Index";
+        $this->template->title   = $this->user->first_name."'s Tables";
 
 
         # Pass data to the View
@@ -83,6 +83,7 @@ class tables_controller extends base_controller {
         $this->template->content->table_id = $table_id;
         $this->template->content->table_info = $table_info;
         $this->template->content->entry_info = $entry_info;
+        $this->template->content->toggleMode = "edit";
 
         # Render template
         echo $this->template;
@@ -128,6 +129,7 @@ class tables_controller extends base_controller {
         $this->template->content->table_id = $table_id;
         $this->template->content->table_info = $table_info;
         $this->template->content->entry_info = $entry_info;
+        $this->template->content->toggleMode = "view";
 
         # Render template
         echo $this->template;
@@ -138,20 +140,23 @@ class tables_controller extends base_controller {
     public function delete($table_id = NULL) {
 
         //THIS FUNCTION DELETES A TABLE
+        # Determine who the owner of the table is
+        $q = "SELECT user_id".
+            " FROM income_tables".
+            " WHERE income_table_id = ".$table_id;
 
-        //Check if the user is the owner of the table!
-        //[INSERT CODE HERE]
+        $verify = DB::instance(DB_NAME)->select_row($q);
 
-        # Configure where condition so that post_id is matched
-        $where_condition = "WHERE income_tables.income_table_id = ".$table_id;
+        if($verify['user_id'] == $this->user->user_id){
 
-        # Delete desired entry from the posts table
-        DB::instance(DB_NAME)->delete('income_tables', $where_condition);
+            # Delte the incoe table that matches the table id
+            $where_condition = "WHERE income_tables.income_table_id = ".$table_id;
 
-        # Reroute user back to his profile page
+            # Delete desired entry from the posts table
+            DB::instance(DB_NAME)->delete('income_tables', $where_condition);
 
-        Router::redirect('/tables/index');
-
+        }
+        Router::redirect('/tables/index/');
 
     } # End of Method
 
@@ -171,7 +176,6 @@ class tables_controller extends base_controller {
         $_POST['created']  = Time::now();
         $_POST['modified'] = Time::now();
 
-
         # Insert
         # Note we didn't have to sanitize any of the $_POST data because we're using the insert method which does it for us
 
@@ -180,7 +184,34 @@ class tables_controller extends base_controller {
 
         $data['id'] = DB::instance(DB_NAME)->insert('income_tables', $_POST);
         $data['name'] = $_POST['name'];
+
+
+        /* -----------------------------------------------
+        # Need to populate the initial entries so that when the "edit" page is opened,
+        # there will be blank spaces for each of the new entries
+        -------------------------------------------------- */
+        $categoryList = ['revenue', 'cos', 'opex', 'otherex'];
+
+        foreach($categoryList as $cat) {
+            $DBdata = Array(
+                "created" => Time::now(),
+                "modified" => Time::now(),
+                # Use the table id just created
+                "income_table_id" => $data['id'],
+                "category" => $cat,
+                "idx" => 0,
+                "value" => 0,
+                "name" => ""
+            );
+
+            # Insert into the users_users table
+            DB::instance(DB_NAME)->insert('table_entries', $DBdata);
+        }
+
+        // Send $data back to the view through AJAX
         echo json_encode($data);
+
+
 
     } # End of Method
 

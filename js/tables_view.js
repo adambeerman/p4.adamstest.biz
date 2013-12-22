@@ -39,7 +39,27 @@ var updateEntries = function() {
     $('#otherex_sum span:last-child').html("<strong>"+accounting.formatMoney(sum[3])+"</strong>");
 
 
+    // Run the profit and margin calculations
+    $grossProfit = accounting.formatMoney(sum[0]-sum[1]);
+    $grossMargin = accounting.formatNumber(100*accounting.unformat($grossProfit)/accounting.unformat(sum[0]));
+    $operatingProfit = accounting.formatMoney(sum[0]-sum[1]-sum[2]);
+    $operatingMargin = accounting.formatNumber(100*accounting.unformat($operatingProfit)/accounting.unformat(sum[0]));
+    $netProfit = accounting.formatMoney(sum[0]-sum[1]-sum[2]-sum[3]);
+    $netMargin = accounting.formatNumber(100*accounting.unformat($netProfit)/accounting.unformat(sum[0]));
+
+    $('#gross_profit').html($grossProfit);
+    $('#gross_margin').html($grossMargin+" %");
+    $('#operating_profit').html($operatingProfit);
+    $('#operating_margin').html($operatingMargin+" %");
+    $('#net_profit').html($netProfit);
+    $('#net_margin').html($netMargin+" %");
+
+    $('#net_profit').css("border-bottom", "1px double darkgray");
 };
+
+
+
+
 
 //Neatly format the accounting entries on page load
 
@@ -50,3 +70,8 @@ $(document).ready(function(){
 
     });
 });
+
+
+//Formatting
+$('#cos, #opex, #otherex').css("border-bottom", "1px solid darkgray");
+

@@ -163,9 +163,6 @@ $('.accounting').change(function(){
     var $moneyPlaceholder = $(this).val();
     $(this).val(accounting.formatMoney($moneyPlaceholder));
 
-    //Find the id of this form, to appropriately sum the contents
-    //sumContents($(this).parent().parent().parent().attr("id"));
-    //profitCalc();
 });
 
 
@@ -174,10 +171,16 @@ $('.accounting').change(function(){
 
 $(document).ready(function(){
     $(".accounting").each(function(){
-        $(this).val(accounting.formatMoney(this.value))
-        updateEntries('revenue');
-        updateEntries('cos');
-        updateEntries('opex');
-        updateEntries('otherex');
+        if(this.value != 0) {
+            $(this).val(accounting.formatMoney(this.value))
+            updateEntries('revenue');
+            updateEntries('cos');
+            updateEntries('opex');
+            updateEntries('otherex');
+        }
+        else {
+            $(this).val("");
+        }
+
     });
 });

@@ -28,7 +28,6 @@
     <!-- placeholder to be able to capitalize the app name on the home page -->
     <div id = "logo">
         <h2><a href = "/"><?=APP_NAME?></a></h2>
-        <span id = "tagline"><?=APP_TAGLINE?></span>
     </div>
 
 
@@ -38,11 +37,15 @@
 
             <ul>
                 <li>
-                    <a href='/tables/index'>My Sheets</a>
+                    <a href='/tables/index'><strong>My Sheets</strong></a>
                 </li>
-                <li>
-                    <a href='/tables/view'>New Sheet</a>
-                </li>
+                <?php if($toggleMode){
+                    echo "<li>";
+                    echo "HELLO";
+                    echo "<a href ='/tables/".$mode."/".$table_id."'>".$mode."</a>";
+                    echo "</li>";
+                }
+                ?>
                 <li>
                     <a href='/users/logout'>Logout</a>
                 </li>

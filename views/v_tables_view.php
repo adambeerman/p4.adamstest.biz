@@ -2,43 +2,40 @@
     # And there will be additional calculations to run the profit margin calculations
 
     -->
+<?php
 
-<pre>
-    <?php
+//Parse the database query to get an array for each category
 
-    //Parse the database query to get an array for each category
+#Initiate category counters
+$r = 0;
+$c = 0;
+$o1 = 0;
+$o2 = 0;
 
-    #Initiate category counters
-    $r = 0;
-    $c = 0;
-    $o1 = 0;
-    $o2 = 0;
-
-    #Loop through $entry_info and create new arrays from the categories using array_slice
-    foreach($entry_info as $i => $entry) {
-        switch($entry['category']):
-            case 'revenue':
-                $revenue[$r] = array_slice($entry,1);
-                $r ++;
-                break;
-            case 'cos':
-                $cos[$c] = array_slice($entry,1);
-                $c ++;
-                break;
-            case 'opex':
-                $opex[$o1] = array_slice($entry,1);
-                $o1 ++;
-                break;
-            case 'otherex':
-                $otherex[$o2] = array_slice($entry,1);
-                $o2 ++;
-                break;
-            default:
-                break;
-        endswitch;
-    }
-    ?>
-</pre>
+#Loop through $entry_info and create new arrays from the categories using array_slice
+foreach($entry_info as $i => $entry) {
+    switch($entry['category']):
+        case 'revenue':
+            $revenue[$r] = array_slice($entry,1);
+            $r ++;
+            break;
+        case 'cos':
+            $cos[$c] = array_slice($entry,1);
+            $c ++;
+            break;
+        case 'opex':
+            $opex[$o1] = array_slice($entry,1);
+            $o1 ++;
+            break;
+        case 'otherex':
+            $otherex[$o2] = array_slice($entry,1);
+            $o2 ++;
+            break;
+        default:
+            break;
+    endswitch;
+}
+?>
 
 <div id = "income_statement" class="panel panel-default">
     <div class="panel-heading">
@@ -128,6 +125,26 @@
             </div>
         </div>
 
+        <div id = "operating" class = "container">
+            <div class = "entry italic">
+                <div class = "calc_name" title = "Net of Gross Profit less Operating Expenses">
+                    Operating Profit
+                </div>
+                <div id = "operating_profit" class = "calculated_field">
+                    Operating Profit
+                </div>
+            </div>
+
+            <div class = "entry italic">
+                <div class = "calc_name" title = "Operating Profit / Revenue">
+                    Operating Margin
+                </div>
+                <div id = "operating_margin" class = "calculated_field">
+                    Operating Margin
+                </div>
+            </div>
+        </div>
+
         <div id = "otherex" class = "container">
             <h5>Other Expenses</h5>
             <?php foreach($otherex as $o2_entry): ?>
@@ -145,5 +162,26 @@
                 <span class = "pull-right"><strong>Total Other Expenses</strong></span>
             </div>
         </div>
+
+        <div id = "net" class = "container">
+            <div class = "entry italic">
+                <div class = "calc_name" title = "Net Income">
+                    Net Profit
+                </div>
+                <div id = "net_profit" class = "calculated_field">
+                    Net Profit
+                </div>
+            </div>
+
+            <div class = "entry italic">
+                <div class = "calc_name" title = "Net Income / Revenue">
+                    Net Margin
+                </div>
+                <div id = "net_margin" class = "calculated_field">
+                    Net Margin
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
