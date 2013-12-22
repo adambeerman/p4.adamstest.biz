@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a249e1da-1712-44d3-a402-6da922c7dde3" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/income.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/income2.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/_v_template.php" afterPath="$PROJECT_DIR$/views/_v_template.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/c_tables.php" afterPath="$PROJECT_DIR$/controllers/c_tables.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tables_add.js" afterPath="$PROJECT_DIR$/js/tables_add.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tables_edit.js" afterPath="$PROJECT_DIR$/js/tables_edit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/tables_view.js" afterPath="$PROJECT_DIR$/js/tables_view.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/v_index_index.php" afterPath="$PROJECT_DIR$/views/v_index_index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/v_tables_edit.php" afterPath="$PROJECT_DIR$/views/v_tables_edit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/v_tables_view.php" afterPath="$PROJECT_DIR$/views/v_tables_view.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="p4.adamstest.biz.iws" />
@@ -176,19 +165,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="17" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.76986754">
+            <state line="31" column="17" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="v_index_index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/v_index_index.php">
+      <file leaf-file-name="database.sql" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/database.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="41" selection-start="1972" selection-end="1972" vertical-scroll-proportion="-23.75">
+            <state line="4" column="18" selection-start="90" selection-end="90" vertical-scroll-proportion="0.10830325">
               <folding />
             </state>
           </provider>
@@ -212,7 +201,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/views/v_tables_index.php" />
         <option value="$PROJECT_DIR$/js/tables_delete.js" />
         <option value="$PROJECT_DIR$/views/v_users_signup.php" />
         <option value="$PROJECT_DIR$/views/v_users_login.php" />
@@ -228,6 +216,7 @@
         <option value="$PROJECT_DIR$/js/tables_add.js" />
         <option value="$PROJECT_DIR$/js/tables_edit.js" />
         <option value="$PROJECT_DIR$/js/tables_view.js" />
+        <option value="$PROJECT_DIR$/database.sql" />
       </list>
     </option>
   </component>
@@ -497,13 +486,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/v_users_signup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="17" selection-end="17" vertical-scroll-proportion="-0.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/v_users_login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="0" selection-start="694" selection-end="694" vertical-scroll-proportion="-16.875">
@@ -641,7 +623,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="17" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.76986754">
+        <state line="31" column="17" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="18" selection-start="90" selection-end="90" vertical-scroll-proportion="0.10830325">
           <folding />
         </state>
       </provider>
