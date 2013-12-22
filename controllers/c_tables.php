@@ -45,45 +45,76 @@ class tables_controller extends base_controller {
 
     public function view($table_id = NULL) {
 
-        //If $table_id has been chosen, then need to select a specific table
-
-        //Select the table information from the table the user has selected
-        $q = "SELECT *
-                FROM income_tables
-                WHERE income_table_id = ".$table_id;
-
-        # Query the database
-        $table_info = DB::instance(DB_NAME)->select_rows($q);
-
-        //Select the table entries from the table the user has selected
-        $q2 = "SELECT category, idx, name, value".
-            " FROM table_entries".
+        //Verify that this user is the owner of the table they wish to view
+        # Determine who the owner of the table is
+        $q = "SELECT user_id".
+            " FROM income_tables".
             " WHERE income_table_id = ".$table_id;
+        $verify = DB::instance(DB_NAME)->select_row($q);
 
-        $entry_info = DB::instance(DB_NAME)->select_rows($q2);
-
-        # Setup view
-        $this->template->content = View::instance('v_tables_view');
-        $this->template->title   = "View - ".$table_info[0]['name'];
+        if($verify['user_id'] == $this->user->user_id){
 
 
+            //Select the table information from the table the user has selected
+            $q = "SELECT *
+                    FROM income_tables
+                    WHERE income_table_id = ".$table_id;
 
-        # Include the accounting & income javascript files
-        $client_files_body = Array(
-            '/js/accounting.js',
-            '/js/income.js',
-            '/js/tables_view.js'
-        );
+            # Query the database
+            $table_info = DB::instance(DB_NAME)->select_row($q);
 
-        # Use load_client_files to generate the links from the above array
-        $this->template->client_files_body = Utils::load_client_files($client_files_body);
+            //Select the table entries from the table the user has selected
+            $q2 = "SELECT category, idx, name, value".
+                " FROM table_entries".
+                " WHERE income_table_id = ".$table_id;
+
+            $entry_info = DB::instance(DB_NAME)->select_rows($q2);
+
+            # Setup view
+            $this->template->content = View::instance('v_tables_view');
+            $this->template->title   = "View - ".$table_info['name'];
+
+            # Include the accounting & income javascript files
+            $client_files_body = Array(
+                '/js/accounting.js',
+                '/js/income.js',
+                '/js/tables_view.js'
+            );
+
+            # Use load_client_files to generate the links from the above array
+            $this->template->client_files_body = Utils::load_client_files($client_files_body);
 
 
-        # Pass data to the view
-        $this->template->content->table_id = $table_id;
-        $this->template->content->table_info = $table_info;
-        $this->template->content->entry_info = $entry_info;
-        $this->template->content->toggleMode = "edit";
+            # Pass data to the view
+            $this->template->content->table_id = $table_id;
+            $this->template->content->table_info = $table_info;
+            $this->template->content->entry_info = $entry_info;
+            $this->template->content->toggleMode = "edit";
+
+        } #end of if()
+
+        // If the user did not have access to the information
+        else {
+            //Select the tables that this user has authored
+            $q = "SELECT *
+                FROM income_tables
+                WHERE user_id = ".$this->user->user_id."
+                ORDER BY modified ASC";
+
+
+            # Query the database
+            $user_tables = DB::instance(DB_NAME)->select_rows($q);
+
+            #Pass
+            $this->template->content = View::instance('v_tables_index');
+            $this->template->title   = $this->user->first_name."'s Tables";
+
+            # Pass data to the View
+            $this->template->content->user_tables = $user_tables;
+            $this->template->content->message = "You do not have appropriate permissions ".
+                "to view that income statement";
+
+        } # end of if/else
 
         # Render template
         echo $this->template;
@@ -92,44 +123,78 @@ class tables_controller extends base_controller {
 
     public function edit($table_id = NULL) {
 
-        //Select the table information from the table the user has selected
-        $q = "SELECT *
+        //Verify that the user has permission:
+        $q = "SELECT user_id".
+            " FROM income_tables".
+            " WHERE income_table_id = ".$table_id;
+        $verify = DB::instance(DB_NAME)->select_row($q);
+
+        if($verify['user_id'] == $this->user->user_id){
+            //Select the table information from the table the user has selected
+            $q = "SELECT *
                 FROM income_tables
                 WHERE income_table_id = ".$table_id;
 
-        # Query the database
-        $table_info = DB::instance(DB_NAME)->select_rows($q);
+            # Query the database
+            $table_info = DB::instance(DB_NAME)->select_rows($q);
 
 
-        //Select the table entries from the table the user has selected
-        $q2 = "SELECT category, idx, name, value".
-            " FROM table_entries".
-            " WHERE income_table_id = ".$table_id;
+            //Select the table entries from the table the user has selected
+            $q2 = "SELECT category, idx, name, value".
+                " FROM table_entries".
+                " WHERE income_table_id = ".$table_id;
 
-        $entry_info = DB::instance(DB_NAME)->select_rows($q2);
-
-
-        //Load relevant JS files
-        $client_files_body = Array(
-            '/js/jquery.form.js',
-            '/js/accounting.js',
-            '/js/income2.js',
-            '/js/tables_edit.js'
-        );
+            $entry_info = DB::instance(DB_NAME)->select_rows($q2);
 
 
-        # Setup view
-        $this->template->content = View::instance('v_tables_edit');
-        $this->template->title   = "Edit - ".$table_info[0]['name'];
+            //Load relevant JS files
+            $client_files_body = Array(
+                '/js/jquery.form.js',
+                '/js/accounting.js',
+                '/js/income2.js',
+                '/js/tables_edit.js'
+            );
 
-        # Use load_client_files to generate the links from the above array
-        $this->template->client_files_body = Utils::load_client_files($client_files_body);
 
-        # Pass data to the view
-        $this->template->content->table_id = $table_id;
-        $this->template->content->table_info = $table_info;
-        $this->template->content->entry_info = $entry_info;
-        $this->template->content->toggleMode = "view";
+            # Setup view
+            $this->template->content = View::instance('v_tables_edit');
+            $this->template->title   = "Edit - ".$table_info[0]['name'];
+
+            # Use load_client_files to generate the links from the above array
+            $this->template->client_files_body = Utils::load_client_files($client_files_body);
+
+            # Pass data to the view
+            $this->template->content->table_id = $table_id;
+            $this->template->content->table_info = $table_info;
+            $this->template->content->entry_info = $entry_info;
+            $this->template->content->toggleMode = "view";
+
+        }
+        else {
+            //Select the tables that this user has authored
+            $q = "SELECT *
+                FROM income_tables
+                WHERE user_id = ".$this->user->user_id."
+                ORDER BY modified ASC";
+
+
+            # Query the database
+            $user_tables = DB::instance(DB_NAME)->select_rows($q);
+
+            #Pass
+            $this->template->content = View::instance('v_tables_index');
+            $this->template->title   = $this->user->first_name."'s Tables";
+
+            # Pass data to the View
+            $this->template->content->user_tables = $user_tables;
+            $this->template->content->message = "You do not have appropriate permissions ".
+                "to edit that income statement";
+
+        }
+
+
+
+
 
         # Render template
         echo $this->template;

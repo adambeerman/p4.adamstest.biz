@@ -1,4 +1,9 @@
 <div id = "user_table_index">
+    <?php if(isset($message)): ?>
+        <div class = "error"><?=$message?></div>
+    <?php endif; ?>
+
+
     <h3><?=$user->first_name ?>'s index of tables</h3>
 
     <ul>
