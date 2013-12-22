@@ -16,7 +16,6 @@ class tables_controller extends base_controller {
                 WHERE user_id = ".$this->user->user_id."
                 ORDER BY modified ASC";
 
-
         # Query the database
         $user_tables = DB::instance(DB_NAME)->select_rows($q);
 
@@ -54,14 +53,13 @@ class tables_controller extends base_controller {
 
         if($verify['user_id'] == $this->user->user_id){
 
-
             //Select the table information from the table the user has selected
-            $q = "SELECT *
+            $q1 = "SELECT *
                     FROM income_tables
                     WHERE income_table_id = ".$table_id;
 
             # Query the database
-            $table_info = DB::instance(DB_NAME)->select_row($q);
+            $table_info = DB::instance(DB_NAME)->select_row($q1);
 
             //Select the table entries from the table the user has selected
             $q2 = "SELECT category, idx, name, value".
@@ -89,21 +87,20 @@ class tables_controller extends base_controller {
             $this->template->content->table_id = $table_id;
             $this->template->content->table_info = $table_info;
             $this->template->content->entry_info = $entry_info;
-            $this->template->content->toggleMode = "edit";
 
         } #end of if()
 
         // If the user did not have access to the information
         else {
             //Select the tables that this user has authored
-            $q = "SELECT *
+            $q1 = "SELECT *
                 FROM income_tables
                 WHERE user_id = ".$this->user->user_id."
                 ORDER BY modified ASC";
 
 
             # Query the database
-            $user_tables = DB::instance(DB_NAME)->select_rows($q);
+            $user_tables = DB::instance(DB_NAME)->select_rows($q1);
 
             #Pass
             $this->template->content = View::instance('v_tables_index');
@@ -140,7 +137,7 @@ class tables_controller extends base_controller {
 
 
             //Select the table entries from the table the user has selected
-            $q2 = "SELECT category, idx, name, value".
+            $q2 = "SELECT category, idx, name, value, table_entry_id".
                 " FROM table_entries".
                 " WHERE income_table_id = ".$table_id;
 
@@ -354,6 +351,16 @@ class tables_controller extends base_controller {
 
                 # Insert into the users_users table
                 DB::instance(DB_NAME)->update_row('table_entries', $DBdata, $where_condition);
+
+                //Update the income_table so that the database knows it was just modified
+                # Information to update
+                $DBdata = Array (
+                    "modified" => Time::now()
+                );
+
+                $where_condition2 = "WHERE income_tables.income_table_id = ".$_POST['income_table_id'];
+
+                DB::instance(DB_NAME)->update_row('income_tables',$DBdata,$where_condition2);
             }
 
             #if there is no an entry for this index, then create it
@@ -390,7 +397,59 @@ class tables_controller extends base_controller {
         //This function will accept the $entry ID and then remove it from the database
         # Still need to figure out how to re-allocate the other entries
 
+        # Find the $tableID
+        $q = "SELECT income_table_id, idx, category".
+            " FROM table_entries".
+            " WHERE table_entry_id = ".$entryID;
 
+        $entryTable = DB::instance(DB_NAME)->select_row($q);
+
+        $q1 = "SELECT user_id".
+            " FROM income_tables".
+            " WHERE income_table_id = ".$entryTable['income_table_id'];
+
+        $entryOwner = DB::instance(DB_NAME)->select_row($q1);
+
+        if($entryOwner['user_id'] == $this->user->user_id){
+
+            // Next step should be to re-position the remaining entries so that there are no blank indexed values
+
+            # determine the index of the deleted row.
+            # if there is an entry in the same category with a higher index, shift those indexes down by 1
+            $q = "SELECT *".
+                " FROM table_entries".
+                " WHERE".
+                " table_entries.income_table_id = ".$entryTable['income_table_id'].
+                " AND table_entries.category = '".$entryTable['category']."'".
+                " ORDER BY idx ASC";
+
+            # Run the query
+            $entries = DB::instance(DB_NAME)->select_rows($q);
+
+
+            # For any entries with a higher index, need to shift those each down by 1
+            foreach($entries as $entry){
+                if($entry['idx']>$entryTable['idx']){
+
+                    # Shift desired index down by 1
+                    $data = Array('idx' => $entry['idx']-1);
+
+                    #Select the entry that matches the current table_entry_id
+                    $where_condition2 = "WHERE table_entries.table_entry_id = ".$entry['table_entry_id'];
+
+                    #Database call to update the index values
+                    DB::instance(DB_NAME)->update_row('table_entries', $data, $where_condition2);
+                }
+            }
+
+            # Delete the matching entries
+            $where_condition = "WHERE table_entries.table_entry_id = ".$entryID;
+
+            # Delete desired entry from the posts table
+            DB::instance(DB_NAME)->delete('table_entries', $where_condition);
+        }
+
+        Router::redirect('/tables/edit/'.$entryTable['income_table_id']);
 
     } # end of delete_entry method
 } # eoc

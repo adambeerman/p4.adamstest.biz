@@ -104,7 +104,7 @@ $('.expand').click(function(){
     var myClass = $(this).parent().attr("id");
 
     //Determine index of the latest entry
-
+    // This is important for indexing the entries for each of the different fields
     var myIndex = $(this).index()-1;
 
     //Generate the Placeholder values for the section that is expanding a row

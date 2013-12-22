@@ -17,6 +17,7 @@ $o1 = 0;
 $o2 = 0;
 
 #Loop through $entry_info and create new arrays from the categories using array_slice
+# Each category: revenue, cos, opex, and other will have its own
 foreach($entry_info as $i => $entry) {
     switch($entry['category']):
         case 'revenue':
@@ -79,6 +80,8 @@ foreach($entry_info as $i => $entry) {
                                     value = "<?=$r_entry['name']?>">
                             </span>
                             <span class = "pull-right">
+                                <a href = '/tables/delete_entry/<?=$r_entry['table_entry_id']?>/'
+                                   title = "click to delete">[-]</a>
                                 <input placeholder="Revenue"
                                     class = "accounting"
                                     name = "revenue[<?=$r_entry['idx']?>]"
@@ -102,7 +105,7 @@ foreach($entry_info as $i => $entry) {
 
 
                 <div class = "expand">
-                    <span pull-right">[+]</span>
+                    <span class = "pull-right" title = "click to add new entry">[+]</span>
                     <br>
                 </div>
                 <div class = "entry calculated_field" id = "revenue_sum">
@@ -128,6 +131,8 @@ foreach($entry_info as $i => $entry) {
                                        value = "<?=$c_entry['name']?>">
                             </span>
                             <span class = "pull-right">
+                                <a href = '/tables/delete_entry/<?=$c_entry['table_entry_id']?>/'
+                                    title = "click to delete entry">[-]</a>
                                 <input placeholder="Cost of Sales"
                                        class = "accounting"
                                        name = "cos[<?=$c_entry['idx']?>]"
@@ -150,7 +155,7 @@ foreach($entry_info as $i => $entry) {
                 <?php endif ?>
 
                 <div class = "expand">
-                    <span pull-right">[+]</span>
+                    <span class = "pull-right" title = "click to add new entry">[+]</span>
                     <br>
                 </div>
                 <div class = "entry calculated_field" id = "cos_sum">
@@ -160,26 +165,6 @@ foreach($entry_info as $i => $entry) {
             </form>
             <br>
         </div>
-
-        <!--<div id = "gross" class = "container">
-            <div class = "entry italic">
-                <div class = "calc_name" title = "Net of Revenue less Cost of Sales">
-                    Gross Profit
-                </div>
-                <div id = "gross_profit" class = "calculated_field">
-                    Gross Profit
-                </div>
-            </div>
-
-            <div class = "entry italic">
-                <div class = "calc_name" title = "Gross Profit / Revenue">
-                    Gross Margin
-                </div>
-                <div id = "gross_margin" class = "calculated_field">
-                    Gross Margin
-                </div>
-            </div>
-        </div> -->
 
         <div id = "opex_div" class = "container">
             <h5>Operating Expenses</h5>
@@ -193,6 +178,8 @@ foreach($entry_info as $i => $entry) {
                                    value = "<?=$o1_entry['name']?>">
                         </span>
                         <span class = "pull-right">
+                            <a href = '/tables/delete_entry/<?=$o1_entry['table_entry_id']?>/'
+                                title = "click to delete entry">[-]</a>
                             <input placeholder="Cost of Sales"
                                    class = "accounting"
                                    name = "opex[<?=$o1_entry['idx']?>]"
@@ -202,7 +189,7 @@ foreach($entry_info as $i => $entry) {
                 <?php endforeach?>
 
                 <div class = "expand">
-                    <span pull-right">[+]</span>
+                    <span class = "pull-right" title = "click to add new entry">[+]</span>
                     <br>
                 </div>
                 <div class = "entry calculated_field" id = "opex_sum">
@@ -225,6 +212,8 @@ foreach($entry_info as $i => $entry) {
                                    value = "<?=$o2_entry['name']?>">
                         </span>
                         <span class = "pull-right">
+                            <a href = '/tables/delete_entry/<?=$o2_entry['table_entry_id']?>/'
+                                title = "click to delete entry">[-]</a>
                             <input placeholder="Other Expense"
                                    class = "accounting"
                                    name = "otherex[<?=$o2_entry['idx']?>]"
@@ -234,7 +223,7 @@ foreach($entry_info as $i => $entry) {
                 <?php endforeach?>
 
                 <div class = "expand">
-                    <span pull-right">[+]</span>
+                    <span class = "pull-right" title = "click to add entry">[+]</span>
                     <br>
                 </div>
                 <div class = "entry calculated_field" id = "otherex_sum">

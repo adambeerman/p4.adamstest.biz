@@ -3,7 +3,6 @@
         <div class = "error"><?=$message?></div>
     <?php endif; ?>
 
-
     <h3><?=$user->first_name ?>'s index of tables</h3>
 
     <ul>
@@ -12,6 +11,8 @@
             <a href = '/tables/view/<?=$table['income_table_id']?>'>View</a> |
             <a href = '/tables/edit/<?=$table['income_table_id']?>'>Edit</a> |
             <a href = "/tables/delete/<?=$table['income_table_id']?>">Delete</a>
+            <br>
+            <small>&nbsp;&nbsp;&nbsp;Last Modified: <?=Time::display($table['modified'])?></small>
         </li>
         <?php endforeach; ?>
     </ul>

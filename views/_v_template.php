@@ -39,10 +39,10 @@
                 <li>
                     <a href='/tables/index'><strong>My Sheets</strong></a>
                 </li>
-                <?php if($toggleMode){
+                <?php if(isset($toggleMode)){
                     echo "<li>";
                     echo "HELLO";
-                    echo "<a href ='/tables/".$mode."/".$table_id."'>".$mode."</a>";
+                    echo "<a href ='/tables/".$toggleMode."/".$table_id."'>".$toggleMode."</a>";
                     echo "</li>";
                 }
                 ?>

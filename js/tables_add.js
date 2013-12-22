@@ -25,7 +25,9 @@ var options = {
         var $insert = data['name'] + " - " +
             "<a href = '/tables/view/"+ data['id'] +"'>View</a> | " +
             "<a href = '/tables/edit/"+ data['id'] +"'>Edit</a> | " +
-            "<a href = '/tables/delete/"+ data['id'] +"'>Delete</a>";
+            "<a href = '/tables/delete/"+ data['id'] +"'>Delete</a>" +
+            "<br><small>&nbsp;&nbsp;&nbsp;&nbsp;" +
+            "Just created!</small>";
 
         $("#user_table_index ul").append('<li>' + $insert + '</li>');
 
