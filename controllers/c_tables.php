@@ -252,7 +252,7 @@ class tables_controller extends base_controller {
         # Need to populate the initial entries so that when the "edit" page is opened,
         # there will be blank spaces for each of the new entries
         -------------------------------------------------- */
-        $categoryList = ['revenue', 'cos', 'opex', 'otherex'];
+        $categoryList = Array('revenue', 'cos', 'opex', 'otherex');
 
         foreach($categoryList as $cat) {
             $DBdata = Array(
