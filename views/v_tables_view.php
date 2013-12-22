@@ -45,8 +45,6 @@ foreach($entry_info as $i => $entry) {
     <div class="panel-heading">
         <h3 class="panel-title"><strong><?=$table_info['name']?></strong></h3>
         <h5 id = "caption"><?=$table_info['caption']?></h5>
-        <h6>Created: <?=Time::display($table_info['created'])?></h6>
-        <h6 id = "last_modified">Last Modified: <?=Time::display($table_info['modified'])?></h6>
     </div>
     <div class="panel-body">
         <div id = "revenue" class = "container">

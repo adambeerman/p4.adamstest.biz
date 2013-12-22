@@ -6,7 +6,9 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
+/* ------------------------
+Functionality for adding a new table
+---------------------------- */
 // Set up the options for ajax
 var options = {
     type: 'POST',

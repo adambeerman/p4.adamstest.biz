@@ -14,9 +14,9 @@
 
 
 	<!-- Controller Specific JS/CSS -->
-    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="/js/jquery-2.0.2.js"></script>
-    <script src="/js/jquery.form.js"></script>
+    <script src="/js/jquery.form.js"></script> -->
 
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 	

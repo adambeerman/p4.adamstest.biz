@@ -92,12 +92,11 @@ $(document).ready(function() {
 
 });
 
+/* ---------------------------
+Jquery listeners to determine when the "expand" class has been clicked
+------------------------------ */
 
-
-
-
-
-//Functaionlity for clicking on the "[+]" sign
+//Functionality for clicking on the "[+]" sign
 $('.expand').click(function(){
 
     //Determine the id of the main div (i.e. find id of parent of parent of parent)
@@ -129,7 +128,7 @@ $('.expand').click(function(){
             break;
     }
 
-
+    // New Entry to be in serted upon successful expand click
     $newEntry = '<div class = "entry">' +
                     '<span class = "entry_name pull-left">' +
                         '<input placeholder="' + placeholderLeft+'" name = "'+ myClass+'Name['+myIndex + ']">'+

@@ -61,6 +61,8 @@ foreach($entry_info as $i => $entry) {
         <h6>Created: <?=Time::display($table_info[0]['created'])?></h6>
         <h6 id = "last_modified">Last Modified: <?=Time::display($table_info[0]['modified'])?></h6>
         <h6><a href = '/tables/view/<?=$table_id?>'>Click here to view the final copy</a></h6>
+        <h6><a href = '/tables/edit/<?=$table_id?>'>Click here to refresh (req'd if you want to delete new entries)</a></h6>
+
     </div>
 
 

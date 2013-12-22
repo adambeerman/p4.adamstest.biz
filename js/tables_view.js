@@ -40,6 +40,9 @@ var updateEntries = function() {
 
 
     // Run the profit and margin calculations
+    // Note that if a user has left an entry blank, then the entry will store the value as "0"
+    // These calculations should still work when a user hasn't filled in an entry
+
     $grossProfit = accounting.formatMoney(sum[0]-sum[1]);
     $grossMargin = accounting.formatNumber(100*accounting.unformat($grossProfit)/accounting.unformat(sum[0]));
     $operatingProfit = accounting.formatMoney(sum[0]-sum[1]-sum[2]);
@@ -56,9 +59,6 @@ var updateEntries = function() {
 
     $('#net_profit').css("border-bottom", "1px double darkgray");
 };
-
-
-
 
 
 //Neatly format the accounting entries on page load

@@ -4,8 +4,6 @@ class tables_controller extends base_controller {
     public function __construct() {
         parent::__construct();
 
-        // Prove to myself tha the __construct() function was called
-        // echo "users_controller construct called<br><br>";
     }
 
     public function index() {
@@ -19,17 +17,17 @@ class tables_controller extends base_controller {
         # Query the database
         $user_tables = DB::instance(DB_NAME)->select_rows($q);
 
-        #Pass
+        #Pass to view
         $this->template->content = View::instance('v_tables_index');
         $this->template->title   = $this->user->first_name."'s Tables";
 
 
         # Pass data to the View
         $this->template->content->user_tables = $user_tables;
-        //$this->template->content->error = $error;
 
         # Load JS files relevant to adding tables via form
         $client_files_body = Array(
+            "/js/jquery-2.0.2.js",
             "/js/jquery.form.js",
             "/js/tables_add.js"
         );
@@ -43,6 +41,8 @@ class tables_controller extends base_controller {
     } # End of Method
 
     public function view($table_id = NULL) {
+
+        //This function displays a neater view of the finalized table (for printing)
 
         //Verify that this user is the owner of the table they wish to view
         # Determine who the owner of the table is
@@ -66,22 +66,12 @@ class tables_controller extends base_controller {
                 " FROM table_entries".
                 " WHERE income_table_id = ".$table_id;
 
+            # Query the database
             $entry_info = DB::instance(DB_NAME)->select_rows($q2);
 
             # Setup view
             $this->template->content = View::instance('v_tables_view');
             $this->template->title   = "View - ".$table_info['name'];
-
-            # Include the accounting & income javascript files
-            $client_files_body = Array(
-                '/js/accounting.js',
-                '/js/income.js',
-                '/js/tables_view.js'
-            );
-
-            # Use load_client_files to generate the links from the above array
-            $this->template->client_files_body = Utils::load_client_files($client_files_body);
-
 
             # Pass data to the view
             $this->template->content->table_id = $table_id;
@@ -113,6 +103,16 @@ class tables_controller extends base_controller {
 
         } # end of if/else
 
+        # Include the accounting & income javascript files
+        $client_files_body = Array(
+            '/js/jquery-2.0.2.js',
+            '/js/accounting.js',
+            '/js/tables_view.js'
+        );
+
+        # Use load_client_files to generate the links from the above array
+        $this->template->client_files_body = Utils::load_client_files($client_files_body);
+
         # Render template
         echo $this->template;
 
@@ -143,22 +143,11 @@ class tables_controller extends base_controller {
 
             $entry_info = DB::instance(DB_NAME)->select_rows($q2);
 
-
-            //Load relevant JS files
-            $client_files_body = Array(
-                '/js/jquery.form.js',
-                '/js/accounting.js',
-                '/js/income2.js',
-                '/js/tables_edit.js'
-            );
-
-
             # Setup view
             $this->template->content = View::instance('v_tables_edit');
             $this->template->title   = "Edit - ".$table_info[0]['name'];
 
-            # Use load_client_files to generate the links from the above array
-            $this->template->client_files_body = Utils::load_client_files($client_files_body);
+
 
             # Pass data to the view
             $this->template->content->table_id = $table_id;
@@ -189,13 +178,18 @@ class tables_controller extends base_controller {
 
         }
 
+        //Load relevant JS files
+        $client_files_body = Array(
+            '/js/jquery-2.0.2.js',
+            '/js/jquery.form.js',
+            '/js/accounting.js',
+            '/js/tables_edit.js');
 
-
-
+        # Use load_client_files to generate the links from the above array
+        $this->template->client_files_body = Utils::load_client_files($client_files_body);
 
         # Render template
         echo $this->template;
-
 
     } # End of Method
 
@@ -339,7 +333,8 @@ class tables_controller extends base_controller {
                 # Generate the information that needs to be updated
                 $DBdata = Array(
                     "modified" => Time::now(),
-                    "value" => floatval(preg_replace("/[^0-9,.-]/","",$item)),
+                    #strip commas and dollar signs from the value saved
+                    "value" => floatval(str_replace(array(',','$'), '' , $item)),
                     "name" => $_POST[$formName.'Name'][$i]
                 );
 
