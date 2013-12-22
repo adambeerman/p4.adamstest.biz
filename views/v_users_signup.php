@@ -1,28 +1,28 @@
 <h2>Sign Up</h2>
 
-<?php if(isset($error)): ?>
-    <div class = 'error' >
-        <?php
-
-        //Display different error codes for different login issues
-        switch($error) {
-            case "signup": echo "SIGNUP ISSUE";
-                break;
-            case 1: echo "Please enter a valid e-mail address";
-                break;
-            case 2: echo "E-mail address already exists!";
-                break;
-            case 3: echo "We at least need your first name!";
-                break;
-            case 4: echo "Password needs to be at least 6 characters";
-                break;
-            default: echo "Login issues. We're working on it!";
-            break;
-        }?>
-    </div>
-<?php endif; ?>
-
 <form id = "sign_up_form" method='POST' action='/users/p_signup'>
+
+    <?php if(isset($error)): ?>
+        <div class = 'error' >
+            <?php
+
+            //Display different error codes for different login issues
+            switch($error) {
+                case "signup": echo "SIGNUP ISSUE";
+                    break;
+                case 1: echo "Please enter a valid e-mail address";
+                    break;
+                case 2: echo "E-mail address already exists!";
+                    break;
+                case 3: echo "We at least need your first name!";
+                    break;
+                case 4: echo "Password needs to be at least 6 characters";
+                    break;
+                default: echo "Login issues. We're working on it!";
+                break;
+            }?>
+        </div>
+    <?php endif; ?>
 
     Name<br>
     <input type='text' name='first_name' placeholder="First">

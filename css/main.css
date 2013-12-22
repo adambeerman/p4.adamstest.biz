@@ -154,6 +154,7 @@ body {
 #sign_up_form, #log_in_form{
     float: left;
     padding: 5px;
+    margin: 10px;
 }
 
 #sign_up_form input, #log_in_form input {
@@ -296,4 +297,8 @@ body {
 #caption_update input:first-child {
     text-align: left;
     width: 50%;
+}
+
+h2 {
+    padding: 15px;
 }
